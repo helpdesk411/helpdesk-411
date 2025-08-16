@@ -219,7 +219,7 @@ export const getAddOns = (): AddOnsData => design.components.AddOns;
 export const getFAQ = (): FAQData => design.components.FAQ;
 export const getCTAFinal = (): CTAFinalData => design.components.CTAFinal;
 export const getFooter = (): FooterData => design.components.Footer;
-export const getPageStructure = (path: string = "/"): string[] => design.page_structure[path] || [];
+export const getPageStructure = (path: string = "/"): string[] => design.page_structure[path as keyof typeof design.page_structure] || [];
 
 // Helper to resolve token references in strings like "{tokens.colors.gradient.start}"
 export const resolveTokenReference = (value: string): string => {

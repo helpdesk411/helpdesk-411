@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils";
+import { type ElementType } from "react";
 
 interface SectionProps {
   children: React.ReactNode;
   className?: string;
   id?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
   padding?: "none" | "sm" | "md" | "lg" | "xl";
 }
 

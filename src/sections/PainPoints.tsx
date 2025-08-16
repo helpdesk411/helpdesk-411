@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { cn } from "@/lib/utils";
-import { getPainPoints } from "@/lib/design";
 import { Shield, Activity, Server, Clock, AlertTriangle } from "lucide-react";
 import type { LucideProps } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -12,14 +11,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-// Icon mapping
-const iconMap: Record<string, React.ComponentType<LucideProps>> = {
-  Shield,
-  Activity,
-  Server,
-  Clock,
-  AlertTriangle,
-};
+
 
 // Pain points data matching the screenshot
 const painPointsData = [

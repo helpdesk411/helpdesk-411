@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { getTokens, resolveTokenReference } from "@/lib/design";
+import { resolveTokenReference } from "@/lib/design";
 
 interface GradientBgProps {
   children: React.ReactNode;
@@ -9,8 +9,6 @@ interface GradientBgProps {
 }
 
 export function GradientBg({ children, className, variant = "hero", rounded = "3xl" }: GradientBgProps) {
-  const tokens = getTokens();
-  
   const gradientVariants = {
     hero: {
       background: `radial-gradient(ellipse at top, ${resolveTokenReference('{tokens.colors.gradient.start}')} 0%, ${resolveTokenReference('{tokens.colors.gradient.mid}')} 45%, ${resolveTokenReference('{tokens.colors.gradient.end}')} 100%)`
