@@ -31,7 +31,7 @@ export function Navbar() {
           "mx-8 rounded-full transition-all duration-300",
           isScrolled 
             ? "mt-6 bg-black/95 backdrop-blur-md shadow-2xl" 
-            : "mt-12 bg-black/90 backdrop-blur-sm"
+            : "mt-8 md:mt-12 bg-black/90 backdrop-blur-sm"
         )}
       >
           <div className="flex h-16 items-center justify-between px-12">

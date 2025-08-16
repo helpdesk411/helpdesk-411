@@ -10,7 +10,7 @@ import { Footer } from "@/sections/Footer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-background px-6 py-6">
+    <div className="min-h-screen bg-background p-2 md:px-6 md:py-6">
       <Navbar />
       <main>
         <Hero />
