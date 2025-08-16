@@ -1,0 +1,66 @@
+# Cursor Rules — Enterprise IT Marketing Site
+
+## What we are building
+A single-page marketing site that matches `Desktop.png`, implemented with React + TailwindCSS, shadcn/ui, and 21st.dev components. Data-driven sections read from `design.json`.
+
+## Primary objectives
+- Match layout/visuals of the mock.
+- Keep components small, typed (TS), and accessible.
+- All texts/pricing pulled from `design.json`.
+
+## Stack
+- Next.js 14 (App Router) **or** Vite + React 18 (choose Next.js by default).
+- TailwindCSS + shadcn/ui + lucide-react + framer-motion.
+- 21st.dev effects for hero/CTA polish.
+
+## Project structure (Next.js)
+/app
+  /components
+  /lib
+  /sections
+  page.tsx
+/design.json
+/public/images
+
+## Coding standards
+- TypeScript strict mode on.
+- Use function components with hooks.
+- Use `clsx` and `tailwind-merge` utilities to compose classNames.
+- Keep layout in `Section` and `Container` wrappers.
+- Prefer composition over config flags; avoid prop drilling via context only when needed.
+- Every interactive element has accessible name and focus ring.
+
+## Theming
+Map shadcn/ui tokens to Tailwind via CSS variables in `globals.css`:
+:root{
+  --background: 255 255 255;
+  --foreground: 15 23 42;
+  --primary: 17 17 17;
+  --primary-foreground: 255 255 255;
+  --accent: 225 29 72;
+  --muted: 244 244 245;
+  --card: 255 255 255;
+  --border: 229 231 235;
+  --ring: 0 0 0;
+}
+
+## Tasks for Cursor (in order)
+1. Scaffold project (Next.js with Tailwind) and install deps:
+   - tailwindcss, class-variance-authority, tailwind-merge, lucide-react, framer-motion
+   - shadcn/ui (init + add button, card, accordion, badge, tabs, dialog, tooltip)
+   - 21st.dev (install and configure as docs suggest)
+2. Create `/design.json` and a config loader in `/lib/design.ts`.
+3. Build base primitives in `/components`: Container, Section, GradientBg.
+4. Build sections in `/sections`: Navbar, Hero, PainPoints, Partner, Pricing, AddOns, FAQ, CTAFinal, Footer.
+5. Wire `/app/page.tsx` to render sections in order from `design.json.page_structure['/']`.
+6. Add smooth scroll behavior and active link highlighting.
+7. Add responsive styles and motion on enter (reduced motion aware).
+8. Optimize images and add alt text from design file.
+9. Add unit tests for data loader and rendering of plans/faq.
+
+## Non-goals
+- Multi-page routing, CMS, or auth.
+
+## Definition of done
+- All acceptance tests in PRD pass.
+- Visual diff within small tolerance to the mock.

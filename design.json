@@ -1,0 +1,365 @@
+{
+  "meta": {
+    "name": "Enterprise-grade IT for Small Businesses - Marketing Site",
+    "version": "1.0.0",
+    "generated_at": "2025-08-16T11:52:02.964817Z",
+    "tools": [
+      "React",
+      "TailwindCSS",
+      "shadcn/ui",
+      "21st.dev"
+    ],
+    "image_reference": "Desktop.png"
+  },
+  "brand": {
+    "name": "Spark IT (placeholder)",
+    "tagline": "Enterprise\u2011grade IT for small businesses",
+    "logo": {
+      "type": "text",
+      "text": "spark\u2022it",
+      "mark": "dot"
+    }
+  },
+  "tokens": {
+    "colors": {
+      "primary": "#111111",
+      "primaryForeground": "#FFFFFF",
+      "accent": "#E11D48",
+      "muted": "#F4F4F5",
+      "foreground": "#0F172A",
+      "secondary": "#2B2B2B",
+      "card": "#FFFFFF",
+      "border": "#E5E7EB",
+      "ring": "#000000",
+      "gradient": {
+        "start": "#FFE0D6",
+        "mid": "#F1D8F9",
+        "end": "#FDEAD1"
+      }
+    },
+    "radius": {
+      "sm": "0.5rem",
+      "md": "1rem",
+      "lg": "1.5rem",
+      "xl": "2rem"
+    },
+    "shadow": {
+      "card": "0 10px 30px rgba(0,0,0,0.06)",
+      "soft": "0 2px 12px rgba(0,0,0,0.08)"
+    },
+    "spacing": {
+      "sectionY": "6rem",
+      "container": "1200px"
+    },
+    "typography": {
+      "fontSans": "'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji','Segoe UI Emoji'",
+      "displayTracking": "-0.02em",
+      "headingWeight": 700,
+      "bodyWeight": 400
+    }
+  },
+  "layout": {
+    "container": {
+      "maxWidth": "1200px",
+      "paddingX": "1rem"
+    },
+    "sections_order": [
+      "Navbar",
+      "Hero",
+      "PainPoints",
+      "Partner",
+      "Pricing",
+      "AddOns",
+      "FAQ",
+      "CTAFinal",
+      "Footer"
+    ]
+  },
+  "components": {
+    "Navbar": {
+      "type": "sticky-top",
+      "left": [
+        "Brand"
+      ],
+      "right": [
+        "NavLink:Features",
+        "NavLink:Pricing",
+        "NavLink:FAQ",
+        "Button:Contact"
+      ],
+      "style": {
+        "backdrop": true,
+        "blur": "md",
+        "rounded": "2xl",
+        "shadow": "soft"
+      }
+    },
+    "Hero": {
+      "bg": {
+        "type": "radial-gradient",
+        "from": "{tokens.colors.gradient.start}",
+        "via": "{tokens.colors.gradient.mid}",
+        "to": "{tokens.colors.gradient.end}"
+      },
+      "headline": "Enterprise\u2011grade IT for small businesses",
+      "subheading": "We monitor, manage, and secure your systems so you can focus on growth. 24/7 coverage, predictable pricing, zero drama.",
+      "primaryAction": {
+        "label": "See pricing",
+        "href": "#pricing",
+        "variant": "default"
+      },
+      "secondaryAction": {
+        "label": "Schedule a call",
+        "href": "#contact",
+        "variant": "secondary"
+      },
+      "embeds": {
+        "chatBubbles": true,
+        "trustPills": [
+          {
+            "text": "Response under 15m"
+          },
+          {
+            "text": "SOC2\u2011ready"
+          },
+          {
+            "text": "M365 + Google Workspace"
+          }
+        ]
+      }
+    },
+    "PainPoints": {
+      "title": "Tech issues don\u2019t fix themselves.",
+      "kickers": [
+        {
+          "icon": "Shield",
+          "title": "Threat Shield",
+          "desc": "Endpoint, email, and identity protection pre\u2011tuned for SMBs."
+        },
+        {
+          "icon": "Activity",
+          "title": "Always\u2011on monitoring",
+          "desc": "We alert and resolve before it impacts your team."
+        },
+        {
+          "icon": "Server",
+          "title": "Managed devices",
+          "desc": "Zero\u2011touch setup. Patch management. Asset tracking."
+        }
+      ]
+    },
+    "Partner": {
+      "title": "A proactive IT partner, not just another support ticket system.",
+      "copy": "You\u2019ll get a named engineer, monthly health reviews, and automation that keeps work humming. Tickets are the exception, not the plan.",
+      "image": "photo-smiling-agent.jpg",
+      "bullets": [
+        {
+          "icon": "Clock",
+          "label": "24\u00d77 coverage"
+        },
+        {
+          "icon": "FileCheck",
+          "label": "Documented runbooks"
+        },
+        {
+          "icon": "ShieldCheck",
+          "label": "Security first defaults"
+        }
+      ]
+    },
+    "Pricing": {
+      "id": "pricing",
+      "plans": [
+        {
+          "name": "Essentials",
+          "price": 50,
+          "per": "device/mo",
+          "features": [
+            "Email & chat support (business hours)",
+            "Endpoint protection + patching",
+            "SaaS access management",
+            "Onboarding & offboarding"
+          ],
+          "cta": {
+            "label": "Get started",
+            "href": "/signup?plan=essentials"
+          }
+        },
+        {
+          "name": "Proactive",
+          "price": 75,
+          "per": "device/mo",
+          "isFeatured": true,
+          "features": [
+            "24/7 monitoring & response",
+            "Network & Wi\u2011Fi management",
+            "Backup & recovery checks",
+            "Monthly health report"
+          ],
+          "cta": {
+            "label": "Choose Proactive",
+            "href": "/signup?plan=proactive"
+          }
+        },
+        {
+          "name": "Premium",
+          "price": 100,
+          "per": "device/mo",
+          "features": [
+            "vCIO & quarterly roadmap",
+            "Compliance assistance (SOC2/ISO prep)",
+            "Advanced EDR + DNS filtering",
+            "Priority SLAs"
+          ],
+          "cta": {
+            "label": "Talk to sales",
+            "href": "/contact"
+          }
+        }
+      ],
+      "notes": "Volume pricing after 50 devices. Servers count as two devices."
+    },
+    "AddOns": {
+      "title": "Add What You Need. Only When You Need It.",
+      "cards": [
+        {
+          "title": "After\u2011hours support",
+          "desc": "Extend coverage to nights & weekends.",
+          "image": "addon1.jpg",
+          "badge": "Popular"
+        },
+        {
+          "title": "vCISO hours",
+          "desc": "Policy reviews & incident tabletop.",
+          "image": "addon2.jpg"
+        },
+        {
+          "title": "New office setup",
+          "desc": "Cabling, Wi\u2011Fi heatmaps, ISP coordination.",
+          "image": "addon3.jpg"
+        },
+        {
+          "title": "Custom app support",
+          "desc": "We integrate your line\u2011of\u2011business tools.",
+          "image": "addon4.jpg"
+        },
+        {
+          "title": "Device procurement",
+          "desc": "Sourcing, imaging, and delivery.",
+          "image": "addon5.jpg"
+        },
+        {
+          "title": "Executive white\u2011glove",
+          "desc": "Concierge care for your leadership team.",
+          "image": "addon6.jpg"
+        }
+      ]
+    },
+    "FAQ": {
+      "items": [
+        {
+          "q": "How fast is response?",
+          "a": "Business hours: under 15 minutes. After\u2011hours: under 30 minutes with add\u2011on."
+        },
+        {
+          "q": "Do you support remote teams?",
+          "a": "Yes. We ship ready\u2011to\u2011use devices and manage across time zones."
+        },
+        {
+          "q": "What about security?",
+          "a": "Security is default\u2011on: EDR, MFA baseline, password management, and backup checks."
+        },
+        {
+          "q": "Is there a contract?",
+          "a": "Month\u2011to\u2011month with a 30\u2011day opt\u2011out."
+        },
+        {
+          "q": "What tools do you support?",
+          "a": "Microsoft 365, Google Workspace, Okta, JumpCloud, common SaaS, and modern SSO."
+        }
+      ]
+    },
+    "CTAFinal": {
+      "headline": "If your IT setup is built on hope, it\u2019s only a matter of time.",
+      "subcopy": "Let\u2019s replace hope with a plan. We\u2019ll audit your environment and propose a roadmap in one week.",
+      "primaryAction": {
+        "label": "Get a quote",
+        "href": "/contact"
+      },
+      "secondaryAction": {
+        "label": "Schedule a call",
+        "href": "/contact#calendar"
+      },
+      "image": "red-headphones.png"
+    },
+    "Footer": {
+      "columns": [
+        {
+          "title": "Company",
+          "links": [
+            "About",
+            "Careers",
+            "Blog"
+          ]
+        },
+        {
+          "title": "Help",
+          "links": [
+            "Support",
+            "Status",
+            "Contact"
+          ]
+        },
+        {
+          "title": "Legal",
+          "links": [
+            "Privacy",
+            "Terms",
+            "DPA"
+          ]
+        }
+      ],
+      "social": [
+        "linkedin",
+        "x",
+        "github"
+      ]
+    }
+  },
+  "page_structure": {
+    "/": [
+      "Navbar",
+      "Hero",
+      "PainPoints",
+      "Partner",
+      "Pricing",
+      "AddOns",
+      "FAQ",
+      "CTAFinal",
+      "Footer"
+    ]
+  },
+  "libraries_map": {
+    "shadcn": [
+      "Button",
+      "Card",
+      "Badge",
+      "Accordion",
+      "Tabs",
+      "Input",
+      "Textarea",
+      "Sheet",
+      "Dialog",
+      "Tooltip"
+    ],
+    "21st.dev": [
+      "Grid",
+      "Container",
+      "Section",
+      "AnimatedBadge",
+      "SparklesText",
+      "BackgroundBeams",
+      "Marquee"
+    ]
+  }
+}
