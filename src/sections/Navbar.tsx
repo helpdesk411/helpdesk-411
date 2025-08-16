@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import { Container } from "@/components/Container";
-import { Button } from "@/components/Button";
 import { cn } from "@/lib/utils";
-import { getNavbar, getBrand } from "@/lib/design";
+import { getBrand } from "@/lib/design";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const navbarData = getNavbar();
   const brandData = getBrand();
 
   useEffect(() => {
@@ -17,12 +14,6 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navLinks = [
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "FAQ", href: "#faq" }
-  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
