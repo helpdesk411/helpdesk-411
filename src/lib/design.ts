@@ -126,7 +126,7 @@ export interface PricingData {
 
 export interface AddOnCard {
   title: string;
-  desc: string;
+  desc?: string;
   image: string;
   badge?: string;
 }
