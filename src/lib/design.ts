@@ -108,6 +108,8 @@ export interface PricingPlan {
   name: string;
   price: number;
   per: string;
+  highlight?: string;
+  subHighlight?: string;
   isFeatured?: boolean;
   features: string[];
   cta: {

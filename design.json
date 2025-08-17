@@ -173,15 +173,23 @@
         {
           "name": "Essentials",
           "price": 50,
+          "highlight": "Handle the basics before they become problems",
+          "subHighlight": "Ideal for small teams or solo operators who want peace of mind and fast support.",
           "per": "device/mo",
           "features": [
-            "Email & chat support (business hours)",
-            "Endpoint protection + patching",
-            "SaaS access management",
-            "Onboarding & offboarding"
+            "Remote help desk for end-user support",
+            "Real-time hardware and software asset tracking",
+            "System health checks and scheduled monitoring",
+            "Patch management for software and operating systems",
+            "Email spam filtering and malware protection",
+            "Antivirus and ransomware protection",
+            "SaaS backups (e.g., Microsoft 365)",
+            "Basic cybersecurity training",
+            "Dark web exposure monitoring",
+            "Local and cloud backup with recovery support"
           ],
           "cta": {
-            "label": "Get started",
+            "label": "Request a Quote",
             "href": "/signup?plan=essentials"
           }
         },
@@ -189,30 +197,42 @@
           "name": "Proactive",
           "price": 75,
           "per": "device/mo",
+          "highlight": "For growing businesses that can't afford IT blind spots",
+          "subHighlight": "Includes everything in Essentials, plus:",
           "isFeatured": true,
           "features": [
-            "24/7 monitoring & response",
-            "Network & Wi\u2011Fi management",
-            "Backup & recovery checks",
-            "Monthly health report"
-          ],
+            "Full network audit and optimization",
+            "Backup and disaster recovery strategy",
+            "Advanced endpoint threat protection",
+            "SaaS integration (Microsoft 365, Google Workspace)",
+            "Vendor management and third-party coordination",
+            "Quarterly business reviews",
+            "Advanced email threat protection",
+            "Monthly reporting with actionable insights"
+            ],
           "cta": {
-            "label": "Choose Proactive",
+            "label": "Request a Quote",
             "href": "/signup?plan=proactive"
           }
         },
         {
           "name": "Premium",
           "price": 100,
-          "per": "device/mo",
+          "highlight": "Enterprise-grade protection, built for modern teams",
+          "subHighlight": "Includes everything in Enhanced, plus:",
+          "per": "device/mo", 
           "features": [
-            "vCIO & quarterly roadmap",
-            "Compliance assistance (SOC2/ISO prep)",
-            "Advanced EDR + DNS filtering",
-            "Priority SLAs"
+            "24/7 remote monitoring and support",
+            "Infrastructure management across multiple sites",
+            "Custom reporting tailored to your business",
+            "Cybersecurity awareness training ($4 per user)",
+            "Multi-factor authentication setup ($2.80 per user)",
+            "Server-level alerting and suspicious activity monitoring ($17 per node)",
+            "Full compliance preparation for SOC2, HIPAA, PCI, and CMMC",
+            "Policy creation and audit-ready documentation"
           ],
-          "cta": {
-            "label": "Talk to sales",
+            "cta": {
+            "label": "Request a Quote",
             "href": "/contact"
           }
         }
