@@ -1,7 +1,6 @@
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { Badge } from "@/components/Badge";
-import { cn } from "@/lib/utils";
 import { getPricing, type PricingPlan } from "@/lib/design";
 import { Check } from "lucide-react";
 
