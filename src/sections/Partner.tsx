@@ -1,76 +1,62 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
-import { getPartner } from "@/lib/design";
-import { Clock, FileCheck, ShieldCheck } from "lucide-react";
-import type { LucideProps } from "lucide-react";
 
-// Icon mapping
-const iconMap: Record<string, React.ComponentType<LucideProps>> = {
-  Clock,
-  FileCheck,
-  ShieldCheck,
-};
 
 export function Partner() {
-  const partnerData = getPartner();
 
   return (
+    <div 
+      className="relative md:min-h-screen bg-cover bg-left md:bg-center bg-no-repeat rounded-3xl overflow-hidden mt-4"
+      style={{
+        backgroundImage: 'url(/images/partners_bg.svg)'
+      }}
+    >
     <Section className="bg-muted/30">
       <Container>
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="flex flex-col md:items-center gap-20">
+          
           {/* Content */}
-          <div className="order-2 lg:order-1">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              {partnerData.title}
+          <div className="flex flex-col gap-6 md:items-center md:text-center md:w-3/4"> 
+            <h2 className="w-[10ch] md:w-full text-5xl md:text-4xl lg:text-5xl font-light text-foreground">
+              A proactive IT partner, not just another support ticket system.
             </h2>
             
-            <p className="text-lg text-foreground/80 mb-8 leading-relaxed">
-              {partnerData.copy}
+            <p className="w-[28ch] md:w-3/4 text-base text-[#8C8C8C] leading-relaxed">
+              We designed our tiered packages to meet the real-world needs of modern teams—from lean operations to multi-site organizations that need rock-solid security and accountability.
             </p>
-            
-            {/* Bullets */}
-            <div className="space-y-4">
-              {partnerData.bullets.map((bullet, index) => {
-                const IconComponent = iconMap[bullet.icon] || Clock;
-                
-                return (
-                  <div key={index} className="flex items-center space-x-3">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                      <IconComponent className="h-4 w-4" />
-                    </div>
-                    <span className="text-foreground font-medium">
-                      {bullet.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+
+            <p className="text-[#333] text-base md:text-sm">Our team plugs in fast, operates clearly, and scales as you grow.</p>  
           </div>
           
           {/* Image */}
-          <div className="order-1 lg:order-2">
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                {/* Placeholder for agent image */}
-                <div className="w-full h-full rounded-2xl bg-muted/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-                      <svg className="w-12 h-12 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                      </svg>
-                    </div>
-                    <p className="text-sm text-foreground/60">Professional Support Agent</p>
-                  </div>
-                </div>
+          <div className="flex flex-col gap-32 md:mb-32">
+            <img src="/images/partners_image.svg" alt="Partner" className="hidden md:block w-full h-96 md:h-full md:object-cover object-center rounded-2xl" />
+
+            <img src="/images/partners_image_mobile.svg" alt="Partner" className="block md:hidden w-full object-cover rounded-2xl" />
+
+            <div className="flex flex-col md:grid md:grid-cols-3 gap-12">
+              <div className="flex flex-col gap-3 items-center">
+                <img className="mb-4" src="/images/proactive_support.svg" alt="Proactive Support" />
+                <h3 className="text-xl">Proactive Support</h3>
+                <p className="text-sm md:text-base text-[#8C8C8C]">We fix issues before they become problems</p>
               </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-accent/20 rounded-full"></div>
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary/20 rounded-full"></div>
+
+              <div className="flex flex-col gap-3 items-center">
+                <img className="mb-4" src="/images/dedicated_team.svg" alt="Dedicated Team" />
+                <h3 className="text-xl">Dedicated Team</h3>
+                <p className="text-sm md:text-base text-[#8C8C8C]">Your own IT department, without the overhead</p>
+              </div>
+
+              <div className="flex flex-col gap-3 items-center">
+                <img className="mb-4" src="/images/fast_response.svg" alt="Fast Response" />
+                <h3 className="text-xl">Fast Response</h3>
+                <p className="text-sm md:text-base text-[#8C8C8C]">Quick resolution times that keep you productive</p>
+              </div>
             </div>
           </div>
         </div>
       </Container>
     </Section>
+    </div>
   );
 }
