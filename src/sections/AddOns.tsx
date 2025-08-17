@@ -1,4 +1,3 @@
-import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { Badge } from "@/components/Badge";
 import { getAddOns, type AddOnCard } from "@/lib/design";
