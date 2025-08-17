@@ -243,35 +243,29 @@
       "title": "Add What You Need. Only When You Need It.",
       "cards": [
         {
-          "title": "After\u2011hours support",
-          "desc": "Extend coverage to nights & weekends.",
-          "image": "addon1.jpg",
-          "badge": "Popular"
+          "title": "Hands-on support when remote assistance isn't enough",
+          "image": "images/addon_1.svg",
+          "badge": "Onsite Visits"
         },
         {
-          "title": "vCISO hours",
-          "desc": "Policy reviews & incident tabletop.",
-          "image": "addon2.jpg"
+          "title": "Priority incident response for critical situations",
+          "image": "images/addon_2.svg",
+          "badge": "Emergency Response"
         },
         {
-          "title": "New office setup",
-          "desc": "Cabling, Wi\u2011Fi heatmaps, ISP coordination.",
-          "image": "addon3.jpg"
+          "title": "Weekend and after-hours availability when you need it most",
+          "image": "images/addon_3.svg",
+          "badge": "After-Hours Support"
         },
         {
-          "title": "Custom app support",
-          "desc": "We integrate your line\u2011of\u2011business tools.",
-          "image": "addon4.jpg"
+          "title": "Custom quote based on your specific equipment needs",
+          "image": "images/addon_4.svg",
+          "badge": "Hardware Procurement"
         },
         {
-          "title": "Device procurement",
-          "desc": "Sourcing, imaging, and delivery.",
-          "image": "addon5.jpg"
-        },
-        {
-          "title": "Executive white\u2011glove",
-          "desc": "Concierge care for your leadership team.",
-          "image": "addon6.jpg"
+          "title": "Custom quote based on needs and compliance requirements",
+          "image": "images/addon_5.svg",
+          "badge": "Compliance Support"
         }
       ]
     },
