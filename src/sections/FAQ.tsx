@@ -14,13 +14,13 @@ interface FAQItemProps {
 
 function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
-    <div className="border border-border rounded-2xl bg-card overflow-hidden">
+    <div className="bg-[#f5f5f5] rounded-2xl overflow-hidden">
       <button
-        className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+        className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-muted/50 transition-colors"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
-        <span className="font-semibold text-foreground">{question}</span>
+        <span className="text-foreground font-light">{question}</span>
         <ChevronDown 
           className={cn(
             "h-5 w-5 text-foreground/60 transition-transform duration-200",
@@ -34,7 +34,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       )}>
         <div className="px-6 pb-4">
-          <p className="text-foreground/80 leading-relaxed">{answer}</p>
+          <p className="text-foreground/80 leading-relaxed font-light">{answer}</p>
         </div>
       </div>
     </div>
@@ -64,8 +64,8 @@ export function FAQ() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
             Frequently Asked Questions
           </h2>
-          <p className="text-lg text-foreground/80">
-            Everything you need to know about our IT services
+          <p className="text-lg text-[#8c8c8c] w-3/4 mx-auto">
+           Get answers to the most common questions about our IT support services
           </p>
         </div>
         
