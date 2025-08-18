@@ -309,34 +309,24 @@
     "Footer": {
       "columns": [
         {
-          "title": "Company",
+          "title": "Quick Links",
+          "links": ["Home", "Plans", "Add-ons", "Contact"]
+        },
+        {
+          "title": "Industries We Serve",
           "links": [
-            "About",
-            "Careers",
-            "Blog"
+            "Startups & SMBs",
+            "Healthcare",
+            "Finance & Insurance",
+            "Legal & Consulting",
+            "Manufacturing",
+            "Multi-site Retail"
           ]
         },
         {
-          "title": "Help",
-          "links": [
-            "Support",
-            "Status",
-            "Contact"
-          ]
-        },
-        {
-          "title": "Legal",
-          "links": [
-            "Privacy",
-            "Terms",
-            "DPA"
-          ]
+          "title": "Get in Touch",
+          "links": ["hello@helpdesk411.com", "1-800-helpdesk411.com"]
         }
-      ],
-      "social": [
-        "linkedin",
-        "x",
-        "github"
       ]
     }
   },
