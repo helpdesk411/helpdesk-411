@@ -244,27 +244,27 @@
       "cards": [
         {
           "title": "Hands-on support when remote assistance isn't enough",
-          "image": "images/addon_1.svg",
+          "image": "images/addon_1.jpg",
           "badge": "Onsite Visits"
         },
         {
           "title": "Priority incident response for critical situations",
-          "image": "images/addon_2.svg",
+          "image": "images/addon_2.jpg",
           "badge": "Emergency Response"
         },
         {
           "title": "Weekend and after-hours availability when you need it most",
-          "image": "images/addon_3.svg",
+          "image": "images/addon_3.jpg",
           "badge": "After-Hours Support"
         },
         {
           "title": "Custom quote based on your specific equipment needs",
-          "image": "images/addon_4.svg",
+          "image": "images/addon_4.jpg",
           "badge": "Hardware Procurement"
         },
         {
           "title": "Custom quote based on needs and compliance requirements",
-          "image": "images/addon_5.svg",
+          "image": "images/addon_5.jpg",
           "badge": "Compliance Support"
         }
       ]
@@ -309,34 +309,24 @@
     "Footer": {
       "columns": [
         {
-          "title": "Company",
+          "title": "Quick Links",
+          "links": ["Home", "Plans", "Add-ons", "Contact"]
+        },
+        {
+          "title": "Industries We Serve",
           "links": [
-            "About",
-            "Careers",
-            "Blog"
+            "Startups & SMBs",
+            "Healthcare",
+            "Finance & Insurance",
+            "Legal & Consulting",
+            "Manufacturing",
+            "Multi-site Retail"
           ]
         },
         {
-          "title": "Help",
-          "links": [
-            "Support",
-            "Status",
-            "Contact"
-          ]
-        },
-        {
-          "title": "Legal",
-          "links": [
-            "Privacy",
-            "Terms",
-            "DPA"
-          ]
+          "title": "Get in Touch",
+          "links": ["hello@helpdesk411.com", "1-800-helpdesk411.com"]
         }
-      ],
-      "social": [
-        "linkedin",
-        "x",
-        "github"
       ]
     }
   },
