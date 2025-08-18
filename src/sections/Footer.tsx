@@ -1,12 +1,24 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { getFooter } from "@/lib/design";
+import { useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 export function Footer() {
   const footerData = getFooter();
+  const location = useLocation();
+  const pathname = location.pathname;
 
   return (
-    <footer className="bg-red-500 rounded-xl text-primary-foreground">
+    <footer className={cn(
+      "rounded-xl text-primary-foreground",
+      pathname === "/b" 
+        ? "rounded-b-2xl mx-4 mb-4" 
+        : "bg-red-500"
+    )} style={pathname === "/b" ? {
+      borderRadius: "0 0 20px 20px",
+      background: "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 36.98%, rgba(0, 0, 0, 0.52) 100%), #EA2427"
+    } : undefined}>
       <Section padding="lg">
         <Container>
           <div className="grid md:grid-cols-4 gap-8 lg:gap-12">

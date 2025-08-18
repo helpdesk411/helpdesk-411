@@ -3,14 +3,22 @@ import { Button } from "@/components/Button";
 import { Badge } from "@/components/Badge";
 import { getPricing, type PricingPlan } from "@/lib/design";
 import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useLocation } from "react-router-dom";
 
 interface PricingCardProps {
   plan: PricingPlan;
+  pathname?: string;
 }
 
-function PricingCard({ plan }: PricingCardProps) {
+function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
+  const isRouteB = pathname === "/b";
+  
   return (
-    <div className="relative rounded-2xl border bg-card p-8 transition-all duration-300 hover:shadow-lg">
+    <div className={cn(
+      "relative rounded-2xl border p-8 transition-all duration-300 hover:shadow-lg",
+      isRouteB ? "bg-white border-gray-200" : "bg-card"
+    )}>
       {plan.isFeatured && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
           <Badge variant="default" className="bg-[#ffd600] text-black px-4 py-1">
@@ -20,18 +28,24 @@ function PricingCard({ plan }: PricingCardProps) {
       )}
       
       <div className="mb-8">
-        <h3 className="text-2xl font-bold text-foreground mb-4">{plan.name}</h3>
+        <h3 className={cn("text-2xl font-bold mb-4", isRouteB ? "text-black" : "text-foreground")}>
+          {plan.name}
+        </h3>
         <div className="flex items-baseline mb-4">
-          <span className="text-4xl font-normal text-foreground">${plan.price}</span>
-          <span className="text-foreground/60 ml-1">/{plan.per}</span>
+          <span className={cn("text-4xl font-normal", isRouteB ? "text-black" : "text-foreground")}>
+            ${plan.price}
+          </span>
+          <span className={cn("ml-1", isRouteB ? "text-black/60" : "text-foreground/60")}>
+            /{plan.per}
+          </span>
         </div>
         {plan.highlight && (
-          <h4 className="text-lg font-semibold text-foreground mb-2 leading-tight">
+          <h4 className={cn("text-lg font-semibold mb-2 leading-tight", isRouteB ? "text-black" : "text-foreground")}>
             {plan.highlight}
           </h4>
         )}
         {plan.subHighlight && (
-          <p className="text-sm text-[#8C8C8C] mb-4 leading-relaxed md:w-3/5">
+          <p className={cn("text-sm mb-4 leading-relaxed md:w-3/5", isRouteB ? "text-black" : "text-[#8C8C8C]")}>
             {plan.subHighlight}
           </p>
         )}
@@ -40,8 +54,10 @@ function PricingCard({ plan }: PricingCardProps) {
       <ul className="space-y-4 mb-8">
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-start space-x-3">
-              <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <span className="text-[#8C8C8C] text-sm leading-relaxed">{feature}</span>
+              <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isRouteB ? "text-black" : "text-foreground")} />
+              <span className={cn("text-sm leading-relaxed", isRouteB ? "text-black" : "text-[#8C8C8C]")}>
+                {feature}
+              </span>
             </li>
           ))}
       </ul>
@@ -49,7 +65,11 @@ function PricingCard({ plan }: PricingCardProps) {
       <Button 
         href={plan.cta.href}
         variant={plan.isFeatured ? "default" : "outline"}
-        className="w-full"
+        className={cn(
+          "w-full",
+          isRouteB && plan.isFeatured ? "bg-black text-white hover:bg-gray-800" : "",
+          isRouteB && !plan.isFeatured ? "bg-gray-200 text-black hover:bg-gray-300" : ""
+        )}
         size="lg"
       >
         {plan.cta.label}
@@ -59,31 +79,80 @@ function PricingCard({ plan }: PricingCardProps) {
 }
 
 export function Pricing() {
+  const location = useLocation();
+  const pathname = location.pathname;
   const pricingData = getPricing();
+
+  // Define colors for each route
+  const routeStyles: Record<string, { titleColor: string; bodyColor: string }> = {
+    "/": {
+      titleColor: "text-white",
+      bodyColor: "text-white",
+    },
+    "/b": {
+      titleColor: "text-white",
+      bodyColor: "text-white",
+    },
+    "/c": {
+      titleColor: "text-green-900",
+      bodyColor: "text-green-900",
+    },
+  };
+
+  // fallback to home if route not in map
+  const { titleColor, bodyColor } = routeStyles[pathname] || routeStyles["/"];
 
   return (
     <div 
-      className="relative md:min-h-screen bg-black bg-cover bg-left md:bg-center-bottom bg-no-repeat rounded-3xl overflow-hidden mt-4"
+      className={cn(
+        "relative md:min-h-screen bg-cover bg-left md:bg-center-bottom bg-no-repeat overflow-hidden",
+        pathname === "/" ? "rounded-3xl mt-4" : ""
+      )}
       style={{
-        backgroundImage: 'url(/images/partners_bg.svg)'
+        backgroundImage: pathname === "/b" ? "none" : 'url(/images/partners_bg.svg)',
+        backgroundColor: pathname === "/b" ? "#242424" : "black"
       }}
     >
-    <Section id="pricing" className="px-8">
+        {pathname === "/b" ? (
+      <div 
+        className="px-8 py-20"
+        style={{
+          background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 70.13%), #EA2427'
+        }}
+      >
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-light text-white md:text-4xl lg:text-5xl mb-6">
+          <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
             What's Included
           </h2>
-          <p className="text-lg font-light text-white max-w-2xl mx-auto">
+          <p className={cn("text-lg font-light max-w-2xl mx-auto", bodyColor)}>
             Choose the right level of protection for your business. Every plan is designed to scale with your growth.
           </p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-8 md:mb-12">
           {pricingData.plans.map((plan, index) => (
-            <PricingCard key={index} plan={plan} />
+            <PricingCard key={index} plan={plan} pathname={pathname} />
           ))}
         </div>
-    </Section>
+      </div>
+    ) : (
+      <Section id="pricing" className="px-8">
+        <div className="text-center mb-16">
+          <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
+            What's Included
+          </h2>
+          <p className={cn("text-lg font-light max-w-2xl mx-auto", bodyColor)}>
+            Choose the right level of protection for your business. Every plan is designed to scale with your growth.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8 md:mb-12">
+          {pricingData.plans.map((plan, index) => (
+            <PricingCard key={index} plan={plan} pathname={pathname} />
+          ))}
+        </div>
+      </Section>
+    )}
     </div>
   );
 }
