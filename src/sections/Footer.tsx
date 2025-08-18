@@ -1,13 +1,6 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
-import { getFooter, getBrand } from "@/lib/design";
-import { Github, Linkedin, Twitter } from "lucide-react";
-
-const socialIconMap = {
-  linkedin: Linkedin,
-  x: Twitter,
-  github: Github,
-};
+import { getFooter } from "@/lib/design";
 
 export function Footer() {
   const footerData = getFooter();

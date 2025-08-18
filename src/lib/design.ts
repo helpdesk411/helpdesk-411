@@ -166,7 +166,6 @@ export interface FooterColumn {
 
 export interface FooterData {
   columns: FooterColumn[];
-  social: string[];
 }
 
 export interface BrandData {
