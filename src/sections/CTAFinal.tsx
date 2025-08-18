@@ -39,7 +39,7 @@ export function CTAFinal() {
   };
 
   // fallback to home if route not in map
-  const { sectionBg, titleColor, subtitleColor, bodyColor, primaryButtonBg, secondaryButtonBg } = routeStyles[pathname] || routeStyles["/"];
+  const { sectionBg, titleColor, bodyColor, primaryButtonBg, secondaryButtonBg } = routeStyles[pathname] || routeStyles["/"];
 
   return (
     <Section className={cn("py-12 md:py-20", sectionBg, pathname === "/b" ? "mx-4 rounded-t-2xl" : "")}>
