@@ -78,14 +78,10 @@ export function Pricing() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-8 md:mb-12">
           {pricingData.plans.map((plan, index) => (
             <PricingCard key={index} plan={plan} />
           ))}
-        </div>
-        
-        <div className="text-center">
-          <p className="text-sm text-foreground/60">{pricingData.notes}</p>
         </div>
     </Section>
     </div>
