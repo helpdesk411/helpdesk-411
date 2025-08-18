@@ -244,27 +244,27 @@
       "cards": [
         {
           "title": "Hands-on support when remote assistance isn't enough",
-          "image": "images/addon_1.jpg",
+          "image": "images/addon_1.svg",
           "badge": "Onsite Visits"
         },
         {
           "title": "Priority incident response for critical situations",
-          "image": "images/addon_2.jpg",
+          "image": "images/addon_2.svg",
           "badge": "Emergency Response"
         },
         {
           "title": "Weekend and after-hours availability when you need it most",
-          "image": "images/addon_3.jpg",
+          "image": "images/addon_3.svg",
           "badge": "After-Hours Support"
         },
         {
           "title": "Custom quote based on your specific equipment needs",
-          "image": "images/addon_4.jpg",
+          "image": "images/addon_4.svg",
           "badge": "Hardware Procurement"
         },
         {
           "title": "Custom quote based on needs and compliance requirements",
-          "image": "images/addon_5.jpg",
+          "image": "images/addon_5.svg",
           "badge": "Compliance Support"
         }
       ]
