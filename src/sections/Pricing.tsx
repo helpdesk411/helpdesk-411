@@ -13,39 +13,70 @@ interface PricingCardProps {
 
 function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
   const isRouteB = pathname === "/b";
+  const isRouteC = pathname === "/c";
   
   return (
     <div className={cn(
       "relative rounded-2xl border p-8 transition-all duration-300 hover:shadow-lg",
-      isRouteB ? "bg-white border-gray-200" : "bg-card"
+      isRouteB ? "bg-white border-gray-200" : 
+      isRouteC ? "bg-white border-gray-200 shadow-lg" :
+      "bg-card"
     )}>
       {plan.isFeatured && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-          <Badge variant="default" className="bg-[#ffd600] text-black px-4 py-1">
+          <Badge variant="default" className={cn(
+            "px-4 py-1",
+            isRouteC ? "bg-red-500 text-white" : "bg-[#ffd600] text-black"
+          )}>
             Most Popular
           </Badge>
         </div>
       )}
       
       <div className="mb-8">
-        <h3 className={cn("text-2xl font-bold mb-4", isRouteB ? "text-black" : "text-foreground")}>
+        <h3 className={cn(
+          "text-2xl font-bold mb-4", 
+          isRouteB ? "text-black" : 
+          isRouteC ? "text-[#333333]" :
+          "text-foreground"
+        )}>
           {plan.name}
         </h3>
         <div className="flex items-baseline mb-4">
-          <span className={cn("text-4xl font-normal", isRouteB ? "text-black" : "text-foreground")}>
+          <span className={cn(
+            "text-4xl font-normal", 
+            isRouteB ? "text-black" : 
+            isRouteC ? "text-[#333333]" :
+            "text-foreground"
+          )}>
             ${plan.price}
           </span>
-          <span className={cn("ml-1", isRouteB ? "text-black/60" : "text-foreground/60")}>
+          <span className={cn(
+            "ml-1", 
+            isRouteB ? "text-black/60" : 
+            isRouteC ? "text-[#333333]/60" :
+            "text-foreground/60"
+          )}>
             /{plan.per}
           </span>
         </div>
         {plan.highlight && (
-          <h4 className={cn("text-lg font-semibold mb-2 leading-tight", isRouteB ? "text-black" : "text-foreground")}>
+          <h4 className={cn(
+            "text-lg font-semibold mb-2 leading-tight", 
+            isRouteB ? "text-black" : 
+            isRouteC ? "text-[#333333]" :
+            "text-foreground"
+          )}>
             {plan.highlight}
           </h4>
         )}
         {plan.subHighlight && (
-          <p className={cn("text-sm mb-4 leading-relaxed md:w-3/5", isRouteB ? "text-black" : "text-[#8C8C8C]")}>
+          <p className={cn(
+            "text-sm mb-4 leading-relaxed md:w-3/5", 
+            isRouteB ? "text-black" : 
+            isRouteC ? "text-[#666666]" :
+            "text-[#8C8C8C]"
+          )}>
             {plan.subHighlight}
           </p>
         )}
@@ -54,8 +85,18 @@ function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
       <ul className="space-y-4 mb-8">
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-start space-x-3">
-              <Check className={cn("w-5 h-5 flex-shrink-0 mt-0.5", isRouteB ? "text-black" : "text-foreground")} />
-              <span className={cn("text-sm leading-relaxed", isRouteB ? "text-black" : "text-[#8C8C8C]")}>
+              <Check className={cn(
+                "w-5 h-5 flex-shrink-0 mt-0.5", 
+                isRouteB ? "text-black" : 
+                isRouteC ? "text-[#333333]" :
+                "text-foreground"
+              )} />
+              <span className={cn(
+                "text-sm leading-relaxed", 
+                isRouteB ? "text-black" : 
+                isRouteC ? "text-[#333333]" :
+                "text-[#8C8C8C]"
+              )}>
                 {feature}
               </span>
             </li>
@@ -68,7 +109,9 @@ function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
         className={cn(
           "w-full",
           isRouteB && plan.isFeatured ? "bg-black text-white hover:bg-gray-800" : "",
-          isRouteB && !plan.isFeatured ? "bg-gray-200 text-black hover:bg-gray-300" : ""
+          isRouteB && !plan.isFeatured ? "bg-gray-200 text-black hover:bg-gray-300" : "",
+          isRouteC && plan.isFeatured ? "bg-black text-white hover:bg-gray-800" : "",
+          isRouteC && !plan.isFeatured ? "bg-white text-[#333333] border-gray-300 hover:bg-gray-100" : ""
         )}
         size="lg"
       >
@@ -94,8 +137,8 @@ export function Pricing() {
       bodyColor: "text-white",
     },
     "/c": {
-      titleColor: "text-green-900",
-      bodyColor: "text-green-900",
+      titleColor: "text-[#333333]",
+      bodyColor: "text-[#666666]",
     },
   };
 
@@ -106,11 +149,12 @@ export function Pricing() {
     <div 
       className={cn(
         "relative md:min-h-screen bg-cover bg-left md:bg-center-bottom bg-no-repeat overflow-hidden",
-        pathname === "/" ? "rounded-3xl mt-4" : ""
+        pathname === "/" ? "rounded-3xl mt-4" : "",
+        pathname === "/c" ? "bg-[#f5f5f5]" : ""
       )}
       style={{
-        backgroundImage: pathname === "/b" ? "none" : 'url(/images/partners_bg.svg)',
-        backgroundColor: pathname === "/b" ? "#242424" : "black"
+        backgroundImage: pathname === "/b" ? "none" : pathname === "/c" ? "none" : 'url(/images/partners_bg.svg)',
+        backgroundColor: pathname === "/b" ? "#242424" : pathname === "/c" ? "transparent" : "black"
       }}
     >
         {pathname === "/b" ? (
@@ -136,7 +180,7 @@ export function Pricing() {
         </div>
       </div>
     ) : (
-      <Section id="pricing" className="px-8">
+      <Section id="pricing" className="px-8 bg-[#f5f5f5]">
         <div className="text-center mb-16">
           <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
             What's Included
