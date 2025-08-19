@@ -132,7 +132,7 @@ export function PainPoints() {
       subTintColor: "text-red-500"
     },
     "/c": {
-      sectionBg: "bg-gray-100",
+      sectionBg: "bg-white",
       titleColor: "text-[#333333]",
       highlightColor: "text-[#bababa]",
       subTintColor: "text-[#333333]"

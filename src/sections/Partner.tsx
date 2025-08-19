@@ -25,7 +25,7 @@
         featureTitleColor: "text-xl text-red-500",
       },
       "/c": {
-        sectionBg: "bg-white",
+        sectionBg: "bg-white md:pb-40",
         titleColor: "text-[#333333]",
         bodyColor: "text-[#333333]",
         accentColor: "text-[#333333]",
@@ -53,19 +53,20 @@
             // Route C layout: Person image on left, cards on right
             <div>
               {/* Text content */}
-              <div className="flex flex-col gap-6">
-                <h2 className={cn("text-4xl lg:text-5xl font-light", titleColor)}>
+              <div className="flex flex-col gap-6 items-center mb-12">
+                <h2 className={cn("md:w-3/4 md:text-center text-4xl lg:text-5xl font-light", titleColor)}>
                   A proactive IT partner, not just another support ticket system.
                 </h2>
                 
-                <p className={cn("text-base leading-relaxed", bodyColor)}>
-                  We designed our tiered packages to meet the real-world needs of modern teams—from lean operations to multi-site organizations that need rock-solid security and accountability. Our team plugs in fast, operates clearly, and scales as you grow.
+                <p className={cn("md:w-3/5 text-gray-400 md:text-center text-base leading-relaxed")}>
+                  We designed our tiered packages to meet the real-world needs of modern teams—from lean operations to multi-site organizations that need rock-solid security and accountability.
                 </p>
+
+                <p className={cn("md:text-center text-base leading-relaxed", bodyColor)}>Our team plugs in fast, operates clearly, and scales as you grow.</p>
               </div>
-              <div className="flex gap-6 items-stretch"> 
+              <div className="flex flex-col md:flex-row gap-6 items-stretch"> 
                 {/* Left side - Person image */}
                 <div className="flex-1">
-
                   <img 
                     src="/images/partners_image_mobile.svg" 
                     alt="IT Professional" 
@@ -77,7 +78,7 @@
                 <div className="flex-1 grid grid-rows-3 gap-6">
                   {/* Proactive Support Card */}
                   <div className={cn(
-                    "p-6 rounded-2xl flex flex-col justify-center items-center gap-4 text-center",
+                    "py-20 md:p-6 rounded-2xl flex flex-col justify-center items-center gap-4 text-center",
                     pathname === "/c" ? "bg-gray-100" : ""
                   )}>
                     <div className="flex-shrink-0">
