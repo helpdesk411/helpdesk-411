@@ -11,12 +11,15 @@ interface AddOnCardComponentProps {
 
 function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
   const isRouteB = pathname === "/b";
+  const isRouteC = pathname === "/c";
   
   return (
     <div 
       className={cn(
         "group relative p-5 md:p-10 transition-all duration-300 hover:shadow-lg",
-        isRouteB ? "rounded-[20px] border-0" : "rounded-2xl border border-border"
+        isRouteB ? "rounded-[20px] border-0" : 
+        isRouteC ? "rounded-2xl bg-gray-100" :
+        "rounded-2xl border border-border"
       )}
       style={isRouteB ? {
         background: 'linear-gradient(180deg, rgba(140, 140, 140, 0.41) 0%, rgba(38, 38, 38, 0.30) 100%)'
@@ -28,6 +31,8 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
           "rounded-full font-light mb-4 md:mb-8 p-2 px-4 shadow-none",
           isRouteB 
             ? "bg-white text-black" 
+            : isRouteC
+            ? "bg-white"
             : "bg-white text-accent-foreground"
         )}
       >
@@ -38,18 +43,22 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
         "md:w-2/4 text-xl md:text-2xl mb-4 md:mb-10 transition-colors",
         isRouteB 
           ? "text-white group-hover:text-red-400" 
+          : isRouteC
+          ? "text-[#333333] font-light text-3xl group-hover:text-[#666666]"
           : "text-[#4d4d4d] group-hover:text-primary"
       )}>
         {card.title}
       </h3>
 
       
-      {/* Image placeholder */}
-      <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4 flex items-center justify-center overflow-hidden">
-        <div className="w-full h-full bg-muted/30 flex items-center justify-center">
-          <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+      {/* Image placeholder - Hidden for route C */}
+      {!isRouteC && (
+        <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4 flex items-center justify-center overflow-hidden">
+          <div className="w-full h-full bg-muted/30 flex items-center justify-center">
+            <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -74,10 +83,10 @@ export function AddOns() {
       bodyColor: "text-white",
     },
     "/c": {
-      sectionBg: "bg-green-50",
-      titleColor: "text-green-900",
-      subtitleColor: "text-green-700",
-      bodyColor: "text-green-800",
+      sectionBg: "bg-white",
+      titleColor: "text-[#333333]",
+      subtitleColor: "text-[#666666] italic",
+      bodyColor: "text-[#666666]",
     },
   };
 
