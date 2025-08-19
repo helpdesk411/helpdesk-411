@@ -1,4 +1,3 @@
-import { Navbar } from "@/sections/Navbar";
 import { Hero } from "@/sections/Hero";
 import { PainPoints } from "@/sections/PainPoints";
 import { Partner } from "@/sections/Partner";
@@ -11,10 +10,9 @@ import { PageSwitcher } from "@/components/PageSwitcher";
 
 export default function PageC() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <PageSwitcher />
-      <Navbar />
-      <main className="bg-white">
+      <main>
         <Hero />
         <PainPoints />
         <Partner />

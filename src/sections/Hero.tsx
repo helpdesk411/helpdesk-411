@@ -3,6 +3,7 @@ import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { getHero } from "@/lib/design";
 import { useLocation } from "react-router-dom";
+import { Navbar } from "./Navbar";
 
 export function Hero() {
   const heroData = getHero();
@@ -179,8 +180,9 @@ export function Hero() {
           background: 'linear-gradient(181deg, #AB1A1C 1.04%, rgba(234, 36, 39, 0.71) 41.47%, rgba(234, 36, 39, 0.00) 70.75%), #EA2427'
         }}
     >
-      <Section className="pt-44 md:pt-60 px-4 pb-0 flex flex-col items-stretch">
-        <Container className="max-w-7xl flex flex-col md:flex-row justify-between items-center px-0">
+      <Section className="pt-0 md:pt-0 px-4 pb-0 md:pb-40 flex flex-col items-stretch">
+        <Navbar />
+        <Container className="max-w-7xl flex flex-col md:flex-row justify-between items-center px-0 pt-20 md:pt-40">
           <div className="w-full max-w-4xl mx-auto md:mb-0 mb-20">
             {/* Headline */}
             <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">

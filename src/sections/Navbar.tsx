@@ -20,6 +20,121 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Route C specific navbar
+  if (pathname === "/c") {
+    return (
+      <header className="sticky top-0 left-0 right-0 z-50 bg-transparent">
+        <div className="relative flex items-center justify-between px-6 py-4">
+          {/* Left side - Contact Button (Desktop) and Logo (Mobile) */}
+          <div className="flex-1 flex items-center">
+            <button className="hidden md:block bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors">
+              Contact
+            </button>
+            
+            {/* Logo - Visible on mobile, hidden on desktop */}
+            <div className="md:hidden">
+              <div className="bg-white rounded-full px-6 py-2 shadow-lg">
+                <div className="flex items-center space-x-2">
+                  <img 
+                    src="/images/logo_black.svg" 
+                    alt="Logo" 
+                    className="w-8 h-8"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Center - Logo with white rounded background (Desktop only) */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <div className="relative">
+              {/* White rounded shape */}
+              <div className="bg-white rounded-full px-8 py-3 shadow-lg">
+                <div className="flex items-center space-x-2">
+                  <img 
+                    src="/images/logo_black.svg" 
+                    alt="Logo" 
+                    className="w-10 h-10"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side - Navigation Links */}
+          <div className="flex-1 flex justify-end">
+            <div className="hidden md:flex items-center space-x-6">
+              <a href="#home" className="text-white hover:text-gray-200 text-sm font-medium">
+                Home
+              </a>
+              <a href="#pricing" className="text-white hover:text-gray-200 text-sm font-medium">
+                Plans
+              </a>
+              <a href="#addons" className="text-white hover:text-gray-200 text-sm font-medium">
+                Add-Ons
+              </a>
+            </div>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        {isOpen && (
+          <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300">
+            <div className={`bg-white h-full w-64 shadow-lg absolute right-0 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+              <div className="flex justify-between items-center p-6 border-b">
+                <span className="text-lg font-semibold">Menu</span>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="text-black hover:text-gray-700"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <div className="p-6 space-y-4">
+                <a 
+                  href="#home" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
+                </a>
+                <a 
+                  href="#pricing" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Plans
+                </a>
+                <a 
+                  href="#addons" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Add-Ons
+                </a>
+                <a 
+                  href="#contact" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
+    );
+  }
+
   // Route B specific navbar
   if (pathname === "/b") {
     return (
