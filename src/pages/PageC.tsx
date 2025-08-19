@@ -11,10 +11,10 @@ import { PageSwitcher } from "@/components/PageSwitcher";
 
 export default function PageC() {
   return (
-    <div className="min-h-screen bg-green-50 p-2 md:px-6 md:py-6">
+    <div className="min-h-screen bg-white">
       <PageSwitcher />
       <Navbar />
-      <main>
+      <main className="bg-white">
         <Hero />
         <PainPoints />
         <Partner />

@@ -11,7 +11,7 @@ import { PageSwitcher } from "@/components/PageSwitcher";
 
 export default function PageB() {
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-background">
       <PageSwitcher />
       <Navbar />
       <main>
