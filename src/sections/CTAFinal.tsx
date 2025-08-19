@@ -29,12 +29,12 @@ export function CTAFinal() {
       secondaryButtonBg: "bg-white",
     },
     "/c": {
-      sectionBg: "bg-green-50",
-      titleColor: "text-green-900",
-      subtitleColor: "text-green-700",
-      bodyColor: "text-green-800",
-      primaryButtonBg: "bg-green-500",
-      secondaryButtonBg: "bg-white border border-green-300",
+      sectionBg: "bg-white",
+      titleColor: "text-[#333333]",
+      subtitleColor: "text-[#666666]",
+      bodyColor: "text-[#666666]",
+      primaryButtonBg: "bg-red-500",
+      secondaryButtonBg: "bg-white border border-black text-black",
     },
   };
 
@@ -79,7 +79,14 @@ export function CTAFinal() {
                 size="lg" 
                 variant="outline"
                 href={ctaData.secondaryAction.href}
-                className={cn("text-base", pathname === "/b" ? "bg-white text-black hover:bg-gray-100" : secondaryButtonBg)}
+                className={cn(
+                  "text-base", 
+                  pathname === "/b" 
+                    ? "bg-white text-black hover:bg-gray-100" 
+                    : pathname === "/c"
+                    ? "bg-white text-black hover:bg-gray-100"
+                    : secondaryButtonBg
+                )}
               >
                 {ctaData.secondaryAction.label}
               </Button>
