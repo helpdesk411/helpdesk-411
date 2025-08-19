@@ -64,6 +64,7 @@ interface PainPointCardProps {
 
 function PainPointCard({ icon: IconComponent, title, description, isCentered = false, pathname = "/" }: PainPointCardProps) {
   const isRouteB = pathname === "/b";
+  const isRouteC = pathname === "/c";
   
   return (
     <div className={cn(
@@ -72,17 +73,28 @@ function PainPointCard({ icon: IconComponent, title, description, isCentered = f
         ? (isCentered 
             ? "bg-white text-black shadow-2xl" 
             : "bg-[#242424] text-[#C8C8C8] shadow-lg")
+        : isRouteC
+        ? (isCentered 
+            ? "bg-gray-100 text-black shadow-2xl border border-gray-200" 
+            : "bg-white text-gray-800 shadow-lg")
         : (isCentered 
             ? "bg-black text-white shadow-2xl" 
             : "bg-gray-100 text-gray-800 shadow-lg")
     )}>
-      <div className={cn("mb-6", isRouteB ? "text-black" : "text-orange-400")}>
+      <div className={cn(
+        "mb-6", 
+        isRouteB ? "text-black" : 
+        isRouteC ? "text-red-500" : 
+        "text-orange-400"
+      )}>
         <IconComponent className="h-8 w-8" />
       </div>
       <h3 className={cn(
         "text-xl mb-4",
         isRouteB 
           ? (isCentered ? "text-black" : "text-[#C8C8C8]")
+          : isRouteC
+          ? (isCentered ? "text-black" : "text-[#333333]")
           : (isCentered ? "text-white" : "text-gray-800")
       )}>
         {title}
@@ -91,6 +103,8 @@ function PainPointCard({ icon: IconComponent, title, description, isCentered = f
         "text-base leading-relaxed",
         isRouteB 
           ? (isCentered ? "text-black" : "text-[#969696]")
+          : isRouteC
+          ? (isCentered ? "text-black" : "text-[#666666]")
           : (isCentered ? "text-white" : "text-gray-600")
       )}>
         {description}
@@ -118,10 +132,10 @@ export function PainPoints() {
       subTintColor: "text-red-500"
     },
     "/c": {
-      sectionBg: "bg-green-50",
-      titleColor: "text-green-900",
-      highlightColor: "text-green-400",
-      subTintColor: "text-red-500"
+      sectionBg: "bg-gray-100",
+      titleColor: "text-[#333333]",
+      highlightColor: "text-[#bababa]",
+      subTintColor: "text-[#333333]"
     },
   };
 
@@ -188,7 +202,9 @@ export function PainPoints() {
                   className={cn(
                     "w-4 h-4 rounded-full transition-all duration-300 hover:scale-110 border-2",
                     isCenter
-                      ? (pathname === "/b" ? "bg-red-500 border-red-500" : "bg-orange-300 border-orange-300")
+                      ? (pathname === "/b" ? "bg-red-500 border-red-500" : 
+                         pathname === "/c" ? "bg-red-500 border-red-500" :
+                         "bg-orange-300 border-orange-300")
                       : "bg-transparent border-gray-300 hover:border-gray-400"
                   )}
                   onClick={() => api?.scrollTo(cardIndex)}
