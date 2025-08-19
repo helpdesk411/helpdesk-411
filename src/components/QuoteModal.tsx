@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { X, Minus, Plus, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface QuoteModalProps {
   isOpen: boolean;
