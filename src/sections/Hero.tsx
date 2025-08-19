@@ -1,6 +1,7 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
+import { QuoteButton } from "@/components/QuoteButton";
 import { getHero } from "@/lib/design";
 import { useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
@@ -195,21 +196,25 @@ export function Hero() {
             </p>
 
             <div className="flex flex-row gap-2 md:gap-4 max-w-sm">
-                <Button 
+                <QuoteButton 
                   size="sm" 
-                  href={heroData.primaryAction.href}
+                  planName="Enterprise IT Support"
+                  planPrice={50}
+                  planDescription="Enterprise-grade IT support for small businesses"
                   className="text-sm md:text-base rounded-full flex-1 h-12 md:h-12"
                 >
                   Get a Quote
-                </Button>
-                  <Button 
+                </QuoteButton>
+                  <QuoteButton 
                     size="sm" 
                     variant="secondary"
-                    href={heroData.secondaryAction.href}
+                    planName="Enterprise IT Support"
+                    planPrice={50}
+                    planDescription="Enterprise-grade IT support for small businesses"
                     className="text-sm text-white border border-white/40 md:text-base bg-transparent rounded-full flex-1 h-12 md:h-12"
                   >
                   See Plans
-                </Button>
+                </QuoteButton>
               </div>
           </div>
           <div className="flex justify-center w-full md:w-5xl">
