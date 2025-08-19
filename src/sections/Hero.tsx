@@ -1,8 +1,10 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
+import { QuoteButton } from "@/components/QuoteButton";
 import { getHero } from "@/lib/design";
 import { useLocation } from "react-router-dom";
+import { Navbar } from "./Navbar";
 
 export function Hero() {
   const heroData = getHero();
@@ -179,8 +181,9 @@ export function Hero() {
           background: 'linear-gradient(181deg, #AB1A1C 1.04%, rgba(234, 36, 39, 0.71) 41.47%, rgba(234, 36, 39, 0.00) 70.75%), #EA2427'
         }}
     >
-      <Section className="pt-44 md:pt-60 px-4 pb-0 flex flex-col items-stretch">
-        <Container className="max-w-7xl flex flex-col md:flex-row justify-between items-center px-0">
+      <Section className="pt-0 md:pt-0 px-4 pb-0 md:pb-40 flex flex-col items-stretch">
+        <Navbar />
+        <Container className="max-w-7xl flex flex-col md:flex-row justify-between items-center px-0 pt-20 md:pt-40">
           <div className="w-full max-w-4xl mx-auto md:mb-0 mb-20">
             {/* Headline */}
             <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
@@ -193,21 +196,25 @@ export function Hero() {
             </p>
 
             <div className="flex flex-row gap-2 md:gap-4 max-w-sm">
-                <Button 
+                <QuoteButton 
                   size="sm" 
-                  href={heroData.primaryAction.href}
+                  planName="Enterprise IT Support"
+                  planPrice={50}
+                  planDescription="Enterprise-grade IT support for small businesses"
                   className="text-sm md:text-base rounded-full flex-1 h-12 md:h-12"
                 >
                   Get a Quote
-                </Button>
-                  <Button 
+                </QuoteButton>
+                  <QuoteButton 
                     size="sm" 
                     variant="secondary"
-                    href={heroData.secondaryAction.href}
+                    planName="Enterprise IT Support"
+                    planPrice={50}
+                    planDescription="Enterprise-grade IT support for small businesses"
                     className="text-sm text-white border border-white/40 md:text-base bg-transparent rounded-full flex-1 h-12 md:h-12"
                   >
                   See Plans
-                </Button>
+                </QuoteButton>
               </div>
           </div>
           <div className="flex justify-center w-full md:w-5xl">
