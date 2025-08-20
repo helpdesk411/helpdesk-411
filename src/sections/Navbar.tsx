@@ -67,21 +67,27 @@ export function Navbar() {
               <a href="#home" className="text-white hover:text-gray-200 text-sm font-medium">
                 Home
               </a>
+              <a href="#features" className="text-white hover:text-gray-200 text-sm font-medium">
+                Features
+              </a>
               <a href="#pricing" className="text-white hover:text-gray-200 text-sm font-medium">
                 Plans
               </a>
               <a href="#addons" className="text-white hover:text-gray-200 text-sm font-medium">
                 Add-Ons
               </a>
+              <a href="#contact" className="text-white hover:text-gray-200 text-sm font-medium">
+                Contact
+              </a>
             </div>
           </div>
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white transition-all duration-200 ease-in-out transform hover:scale-110"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={28} className="transition-all duration-200 ease-in-out" /> : <Menu size={28} className="transition-all duration-200 ease-in-out" />}
           </button>
         </div>
 
@@ -148,6 +154,9 @@ export function Navbar() {
             <a href="#home" className="text-black hover:text-gray-700 text-sm font-medium">
               Home
             </a>
+            <a href="#features" className="text-black hover:text-gray-700 text-sm font-medium">
+              Features
+            </a>
             <a href="#pricing" className="text-black hover:text-gray-700 text-sm font-medium">
               Plans
             </a>
@@ -161,10 +170,10 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-black"
+            className="md:hidden text-black transition-all duration-200 ease-in-out transform hover:scale-110"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? <X size={28} className="transition-all duration-200 ease-in-out" /> : <Menu size={28} className="transition-all duration-200 ease-in-out" />}
           </button>
         </div>
 
@@ -200,6 +209,13 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   Home
+                </a>
+                <a 
+                  href="#features" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Features
                 </a>
                 <a 
                   href="#pricing" 
@@ -258,31 +274,37 @@ export function Navbar() {
           <div className="hidden lg:flex items-center space-x-8">
             <a
               href="#home"
-              className="text-white/90 hover:text-white text-sm font-medium transition-colors flex items-center space-x-1"
+              className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105 flex items-center space-x-1"
             >
               <span>Home</span>
-              <svg className="w-3 h-3 ml-1" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3 h-3 ml-1 transition-transform duration-200 ease-in-out group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </a>
             <a
+              href="#features"
+              className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
+            >
+              Features
+            </a>
+            <a
               href="#pricing"
-              className="text-white/90 hover:text-white text-sm font-medium transition-colors flex items-center space-x-1"
+              className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105 flex items-center space-x-1"
             >
               <span>Plans</span>
-              <svg className="w-3 h-3 ml-1" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3 h-3 ml-1 transition-transform duration-200 ease-in-out group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </a>
             <a
               href="#addons"
-              className="text-white/90 hover:text-white text-sm font-medium transition-colors"
+              className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
             >
               Add-Ons
             </a>
             <a
               href="#contact"
-              className="text-white/90 hover:text-white text-sm font-medium transition-colors"
+              className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
             >
               Contact
             </a>
@@ -290,25 +312,81 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-white/10 text-white"
+            className="lg:hidden p-2 rounded-lg hover:bg-white/10 text-white transition-all duration-200 ease-in-out transform hover:scale-110"
             aria-label="Toggle navigation menu"
+            onClick={() => setIsOpen(!isOpen)}
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            {isOpen ? <X size={20} className="transition-all duration-200 ease-in-out" /> : (
+              <svg
+                className="h-5 w-5 transition-all duration-200 ease-in-out"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+        <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${isOpen ? 'bg-opacity-50' : 'bg-opacity-0'}`} onClick={() => setIsOpen(false)}></div>
+        <div className={`bg-white h-full w-64 shadow-2xl absolute right-0 transform transition-all duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="flex justify-between items-center p-6 border-b">
+            <span className="text-lg font-semibold">Menu</span>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-black hover:text-gray-700 transition-all duration-200 ease-in-out transform hover:scale-110 hover:rotate-90"
+            >
+              <X size={24} />
+            </button>
+          </div>
+          <div className="p-6 space-y-4">
+            <a 
+              href="#home" 
+              className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
+              onClick={() => setIsOpen(false)}
+            >
+              Home
+            </a>
+            <a 
+              href="#features" 
+              className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
+              onClick={() => setIsOpen(false)}
+            >
+              Features
+            </a>
+            <a 
+              href="#pricing" 
+              className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
+              onClick={() => setIsOpen(false)}
+            >
+              Plans
+            </a>
+            <a 
+              href="#addons" 
+              className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
+              onClick={() => setIsOpen(false)}
+            >
+              Add-Ons
+            </a>
+            <a 
+              href="#contact" 
+              className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
