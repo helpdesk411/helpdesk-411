@@ -101,7 +101,7 @@ export function AddOns() {
   const { sectionBg, titleColor, subtitleColor, bodyColor } = routeStyles[pathname] || routeStyles["/"];
 
   return (
-    <Section className={cn(sectionBg, "px-8 py-12 md:py-24", pathname === "/" ? "rounded-2xl mt-4" : "")}>
+    <Section id="addons" className={cn(sectionBg, "px-8 py-12 md:py-24", pathname === "/" ? "rounded-2xl mt-4" : "")}>
         <div className="text-center mb-16">
           <h2 className={cn("text-3xl md:text-4xl lg:text-5xl mb-6", titleColor)}>
             Add What You Need. <span className={subtitleColor}>Only When You Need It.</span> 

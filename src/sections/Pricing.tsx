@@ -162,6 +162,7 @@ export function Pricing() {
     >
         {pathname === "/b" ? (
       <div 
+        id="pricing"
         className="px-8 py-20"
         style={{
           background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 70.13%), #EA2427'

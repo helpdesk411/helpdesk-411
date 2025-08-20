@@ -19,7 +19,7 @@ export function Hero() {
           backgroundImage: 'url(/images/hero_bg_3.svg)'
         }}
       >
-      <Section className="pt-44 md:pt-60 pb-8 md:pb-20 px-4 md:min-h-screen flex">
+      <Section id="home" className="pt-44 md:pt-60 pb-8 md:pb-20 px-4 md:min-h-screen flex">
         <Container>
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
@@ -80,7 +80,7 @@ export function Hero() {
           background: 'linear-gradient(180deg, #911618 8.58%, rgba(234, 36, 39, 0.71) 118.62%, rgba(234, 36, 39, 0.00) 151.19%), linear-gradient(0deg, #EA2427 0%, #EA2427 100%), #F9BEBF'
         }}
       >
-      <Section className="pt-44 md:pt-60 px-4 pb-0 md:min-h-screen flex flex-col items-stretch">
+      <Section id="home" className="pt-44 md:pt-60 px-4 pb-0 md:min-h-screen flex flex-col items-stretch">
         <Container>
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
@@ -129,7 +129,7 @@ export function Hero() {
           background: 'linear-gradient(181deg, #AB1A1C 1.04%, rgba(234, 36, 39, 0.71) 41.47%, rgba(234, 36, 39, 0.00) 70.75%), #EA2427'
         }}
     >
-      <Section className="pt-0 md:pt-0 px-4 pb-0 md:pb-40 flex flex-col items-stretch">
+      <Section id="home" className="pt-0 md:pt-0 px-4 pb-0 md:pb-40 flex flex-col items-stretch">
         <Navbar />
         <Container className="max-w-7xl flex flex-col md:flex-row justify-between items-center px-0 pt-20 md:pt-40">
           <div className="w-full max-w-4xl mx-auto md:mb-0 mb-20">

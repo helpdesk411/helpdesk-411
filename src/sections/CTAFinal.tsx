@@ -42,7 +42,7 @@ export function CTAFinal() {
   const { sectionBg, titleColor, bodyColor, primaryButtonBg, secondaryButtonBg } = routeStyles[pathname] || routeStyles["/"];
 
   return (
-    <Section className={cn("py-12 md:py-20", sectionBg, pathname === "/b" ? "mx-4 rounded-t-2xl" : "")}>
+    <Section id="contact" className={cn("py-12 md:py-20", sectionBg, pathname === "/b" ? "mx-4 rounded-t-2xl" : "")}>
       <Container>
           {/* Content */}
             <h2 className={cn("md:w-3/4 mx-auto text-center text-3xl md:text-4xl lg:text-5xl font-bold md:mb-6", titleColor)}>

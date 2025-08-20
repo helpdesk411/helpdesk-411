@@ -67,11 +67,17 @@ export function Navbar() {
               <a href="#home" className="text-white hover:text-gray-200 text-sm font-medium">
                 Home
               </a>
+              <a href="#features" className="text-white hover:text-gray-200 text-sm font-medium">
+                Features
+              </a>
               <a href="#pricing" className="text-white hover:text-gray-200 text-sm font-medium">
                 Plans
               </a>
               <a href="#addons" className="text-white hover:text-gray-200 text-sm font-medium">
                 Add-Ons
+              </a>
+              <a href="#contact" className="text-white hover:text-gray-200 text-sm font-medium">
+                Contact
               </a>
             </div>
           </div>
@@ -148,6 +154,9 @@ export function Navbar() {
             <a href="#home" className="text-black hover:text-gray-700 text-sm font-medium">
               Home
             </a>
+            <a href="#features" className="text-black hover:text-gray-700 text-sm font-medium">
+              Features
+            </a>
             <a href="#pricing" className="text-black hover:text-gray-700 text-sm font-medium">
               Plans
             </a>
@@ -200,6 +209,13 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   Home
+                </a>
+                <a 
+                  href="#features" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Features
                 </a>
                 <a 
                   href="#pricing" 
@@ -264,6 +280,12 @@ export function Navbar() {
               <svg className="w-3 h-3 ml-1 transition-transform duration-200 ease-in-out group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
+            </a>
+            <a
+              href="#features"
+              className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
+            >
+              Features
             </a>
             <a
               href="#pricing"
@@ -333,6 +355,13 @@ export function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               Home
+            </a>
+            <a 
+              href="#features" 
+              className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
+              onClick={() => setIsOpen(false)}
+            >
+              Features
             </a>
             <a 
               href="#pricing" 
