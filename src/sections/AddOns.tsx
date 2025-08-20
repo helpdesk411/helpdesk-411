@@ -16,7 +16,7 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
   return (
     <div 
       className={cn(
-        "group relative p-5 md:p-10 transition-all duration-300 hover:shadow-lg",
+        "group bg-[#E8E8E8] relative p-5 md:p-10 transition-all duration-300 hover:shadow-lg",
         isRouteB ? "rounded-[20px] border-0" : 
         isRouteC ? "rounded-2xl bg-gray-100" :
         "rounded-2xl border border-border"
