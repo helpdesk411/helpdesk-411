@@ -132,8 +132,8 @@ export function Pricing() {
   // Define colors for each route
   const routeStyles: Record<string, { titleColor: string; bodyColor: string }> = {
     "/": {
-      titleColor: "text-white",
-      bodyColor: "text-white",
+      titleColor: "text-[#333333]",
+      bodyColor: "text-[#666666]",
     },
     "/b": {
       titleColor: "text-white",
