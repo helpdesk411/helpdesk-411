@@ -3,6 +3,7 @@ import { Badge } from "@/components/Badge";
 import { getAddOns, type AddOnCard } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
+import { MapPin } from "lucide-react";
 
 interface AddOnCardComponentProps {
   card: AddOnCard;
@@ -28,7 +29,7 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
       <Badge 
         variant="accent" 
         className={cn(
-          "rounded-full font-light mb-4 md:mb-8 p-2 px-4 shadow-none",
+          "rounded-full font-light mb-4 md:mb-8 p-2 px-4 shadow-none flex items-center gap-2 w-fit",
           isRouteB 
             ? "bg-white text-black" 
             : isRouteC
@@ -36,6 +37,12 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
             : "bg-white text-accent-foreground"
         )}
       >
+        <MapPin 
+          size={16} 
+          className={cn(
+            isRouteB ? "text-black" : "text-red-500"
+          )}
+        />
         {card.badge}
       </Badge>
 
