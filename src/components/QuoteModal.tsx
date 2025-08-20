@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, Minus, Plus, Star } from "lucide-react";
 
 interface QuoteModalProps {
@@ -10,6 +10,15 @@ interface QuoteModalProps {
   isPopular?: boolean;
 }
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: { sitekey: string; callback: (t: string) => void; 'expired-callback'?: () => void }) => void;
+      reset: (el?: HTMLElement) => void;
+    };
+  }
+}
+
 export function QuoteModal({ 
   isOpen, 
   onClose, 
@@ -19,32 +28,71 @@ export function QuoteModal({
   isPopular = false 
 }: QuoteModalProps) {
   const [quantity, setQuantity] = useState(1);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    address: ""
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", address: "" });
+  const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState("");
+  const [start] = useState(() => performance.now()); // time-to-fill start
+  const widgetRef = useRef<HTMLDivElement | null>(null);
 
   const totalPrice = planPrice * quantity;
 
-  const handleQuantityChange = (newQuantity: number) => {
-    if (newQuantity >= 1) {
-      setQuantity(newQuantity);
+  useEffect(() => {
+    if (!isOpen) return;
+    setToken("");
+    // Render Turnstile widget when modal opens
+    const el = widgetRef.current;
+    if (el && window.turnstile) {
+      window.turnstile.render(el, {
+        sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY as string,
+        callback: (t) => setToken(t),
+        "expired-callback": () => setToken(""),
+      });
     }
+  }, [isOpen]);
+
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity >= 1) setQuantity(newQuantity);
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Quote requested:", { planName, quantity, totalPrice, formData });
-    onClose();
+    if (!token) return; // require human check
+    setLoading(true);
+
+    try {
+      const honeypot = (document.querySelector('input[name="company_website"]') as HTMLInputElement)?.value || '';
+      const payload = {
+        planName,
+        quantity,
+        totalPrice,
+        formData,
+        honeypot,                // hidden bot trap (should be blank)
+        ttf: Math.round(performance.now() - start),
+        turnstileToken: token,   // proof of humanity
+      };
+
+      const r = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = await r.json();
+      if (!r.ok) throw new Error(json.error || "Failed");
+      
+      // success UI
+      alert("Thanks! We’ve received your request. Check your email for a receipt.");
+      onClose();
+    } catch (err: any) {
+      alert(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+      // Optionally reset the widget to require a fresh token on retry
+      if (widgetRef.current && window.turnstile?.reset) window.turnstile.reset(widgetRef.current);
+    }
   };
 
   if (!isOpen) return null;
@@ -63,10 +111,7 @@ export function QuoteModal({
               </div>
             )}
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
-          >
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -84,10 +129,7 @@ export function QuoteModal({
           {/* Quantity Selector */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <button
-                onClick={() => handleQuantityChange(quantity - 1)}
-                className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-              >
+              <button onClick={() => handleQuantityChange(quantity - 1)} className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50">
                 <Minus className="w-4 h-4" />
               </button>
               <input
@@ -97,10 +139,7 @@ export function QuoteModal({
                 className="w-16 text-center border border-gray-300 rounded px-2 py-1"
                 min="1"
               />
-              <button
-                onClick={() => handleQuantityChange(quantity + 1)}
-                className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-              >
+              <button onClick={() => handleQuantityChange(quantity + 1)} className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50">
                 <Plus className="w-4 h-4" />
               </button>
             </div>
@@ -136,13 +175,26 @@ export function QuoteModal({
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-            
+
+            {/* Honeypot: should stay empty */}
+            <input
+              type="text"
+              name="company_website"
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+            />
+
+            {/* Turnstile widget renders here */}
+            <div ref={widgetRef} />
+
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+              className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+              disabled={!token || loading}
             >
-              Request a Quote
+              {loading ? 'Sending…' : 'Request a Quote'}
             </button>
           </form>
         </div>
