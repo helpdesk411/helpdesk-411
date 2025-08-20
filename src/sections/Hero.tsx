@@ -23,7 +23,7 @@ export function Hero() {
         <Container>
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
-            <h1 className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl font-normal tracking-tight text-black mb-4 md:mb-12 px-2 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-black mb-4 md:mb-12 px-2 leading-tight">
               Enterprise‑grade IT <span className="text-[#878787]">for small businesses</span> 
             </h1>
             
