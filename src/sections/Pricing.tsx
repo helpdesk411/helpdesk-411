@@ -132,8 +132,8 @@ export function Pricing() {
   // Define colors for each route
   const routeStyles: Record<string, { titleColor: string; bodyColor: string }> = {
     "/": {
-      titleColor: "text-[#333333]",
-      bodyColor: "text-[#666666]",
+      titleColor: "text-white",
+      bodyColor: "text-white",
     },
     "/b": {
       titleColor: "text-white",
@@ -156,7 +156,7 @@ export function Pricing() {
         pathname === "/c" ? "bg-[#f5f5f5]" : ""
       )}
       style={{
-        backgroundImage: pathname === "/b" ? "none" : pathname === "/c" ? "none" : 'url(/images/partners_bg.svg)',
+        backgroundImage: pathname === "/b" ? "none" : pathname === "/c" ? "none" : 'url(/images/pricing_bg_main.svg)',
         backgroundColor: pathname === "/b" ? "#242424" : pathname === "/c" ? "transparent" : "black"
       }}
     >
@@ -183,7 +183,7 @@ export function Pricing() {
         </div>
       </div>
     ) : (
-      <Section id="pricing" className="px-8 bg-[#f5f5f5]">
+      <Section id="pricing" className="px-4 py-10 md:px-8 md:py-20">
         <div className="text-center mb-16">
           <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
             What's Included
