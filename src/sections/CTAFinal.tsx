@@ -4,6 +4,8 @@ import { Button } from "@/components/Button";
 import { getCTAFinal } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
+import { ScrollAnimation, FadeIn, ScaleIn } from "@/components/ScrollAnimation";
+import { FloatingRotating, HoverLift } from "@/components/AnimatedElements";
 
 export function CTAFinal() {
   const location = useLocation();
@@ -45,29 +47,38 @@ export function CTAFinal() {
     <Section id="contact" className={cn("py-12 md:py-20", sectionBg, pathname === "/b" ? "mx-4 rounded-t-2xl" : "")}>
       <Container>
           {/* Content */}
+          <ScrollAnimation delay={0.2}>
             <h2 className={cn("md:w-3/4 mx-auto text-center text-3xl md:text-4xl lg:text-5xl font-bold md:mb-6", titleColor)}>
-              If your IT setup is built on hope, <span className="text-[#bababa]">it’s only a matter of time.</span>
+              If your IT setup is built on hope, <span className="text-[#bababa]">it's only a matter of time.</span>
             </h2>
+          </ScrollAnimation>
           
           {/* Image */}
-          <div className="relative">
-            <div className="aspect-square max-w-2xl mx-auto">
-              {/* Headphones illustration placeholder */}
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="relative">
-                  {/* Headphones SVG */}
-                  <img src="images/cta_image.svg" alt="CTA Final" className="w-full h-full object-cover" />
+          <FadeIn delay={0.4}>
+            <div className="relative">
+              <div className="aspect-square max-w-2xl mx-auto">
+                {/* Headphones illustration placeholder */}
+                <div className="w-full h-full flex items-center justify-center">
+                  <HoverLift className="relative cursor-pointer">
+                    <FloatingRotating>
+                      {/* Headphones SVG */}
+                      <img src="images/cta_image.svg" alt="CTA Final" className="w-full h-full object-cover" />
+                    </FloatingRotating>
+                  </HoverLift>
                 </div>
               </div>
             </div>
-          </div>
+          </FadeIn>
 
           <div className="flex flex-col items-center">
-            <p className={cn("md:w-2/3 text-center text-lg mb-8 leading-relaxed", bodyColor)}>
-              Let's take this off your plate, lock down your infrastructure, and help your business move faster with fewer risks.
-            </p>
+            <ScrollAnimation delay={0.6}>
+              <p className={cn("md:w-2/3 text-center text-lg mb-8 leading-relaxed mx-auto", bodyColor)}>
+                Let's take this off your plate, lock down your infrastructure, and help your business move faster with fewer risks.
+              </p>
+            </ScrollAnimation>
             
-            <div className="flex sm:flex-row gap-4">
+            <ScaleIn delay={0.8}>
+              <div className="flex sm:flex-row gap-4">
               <Button 
                 size="lg" 
                 href={ctaData.primaryAction.href}
@@ -90,7 +101,8 @@ export function CTAFinal() {
               >
                 {ctaData.secondaryAction.label}
               </Button>
-            </div>
+              </div>
+            </ScaleIn>
           </div>
         
       </Container>

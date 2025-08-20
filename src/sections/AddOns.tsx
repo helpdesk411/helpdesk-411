@@ -4,6 +4,7 @@ import { getAddOns, type AddOnCard } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
 import { MapPin } from "lucide-react";
+import { ScrollAnimation, StaggerAnimation, ScaleIn } from "@/components/ScrollAnimation";
 
 interface AddOnCardComponentProps {
   card: AddOnCard;
@@ -102,32 +103,44 @@ export function AddOns() {
 
   return (
     <Section id="addons" className={cn(sectionBg, "px-8 py-12 md:py-24", pathname === "/" ? "rounded-2xl mt-4" : "")}>
-        <div className="text-center mb-16">
-          <h2 className={cn("text-3xl md:text-4xl lg:text-5xl mb-6", titleColor)}>
-            Add What You Need. <span className={subtitleColor}>Only When You Need It.</span> 
-          </h2>
-          <p className={cn("text-lg max-w-2xl mx-auto", bodyColor)}>
-            Available across all plans to enhance your IT support experience
-          </p>
-        </div>
+        <ScrollAnimation>
+          <div className="text-center mb-16">
+            <h2 className={cn("text-3xl md:text-4xl lg:text-5xl mb-6", titleColor)}>
+              Add What You Need. <span className={subtitleColor}>Only When You Need It.</span> 
+            </h2>
+            <p className={cn("text-lg max-w-2xl mx-auto", bodyColor)}>
+              Available across all plans to enhance your IT support experience
+            </p>
+          </div>
+        </ScrollAnimation>
         
+        <StaggerAnimation staggerDelay={0.15}>
           {/* First row - 3 cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-6">
             {addOnsData.cards.slice(0, 3).map((card, index) => (
-              <AddOnCardComponent key={index} card={card} pathname={pathname} />
+              <ScaleIn key={index} delay={index * 0.1}>
+                <AddOnCardComponent card={card} pathname={pathname} />
+              </ScaleIn>
             ))}
           </div>
+        </StaggerAnimation>
           
+        <StaggerAnimation staggerDelay={0.15}>
           {/* Second row - 2 cards taking 50% each */}
           <div className="grid md:grid-cols-2 gap-6 mb-10 md:mb-20">
             {addOnsData.cards.slice(3, 5).map((card, index) => (
-              <AddOnCardComponent key={index + 3} card={card} pathname={pathname} />
+              <ScaleIn key={index + 3} delay={index * 0.1}>
+                <AddOnCardComponent card={card} pathname={pathname} />
+              </ScaleIn>
             ))}
           </div>
+        </StaggerAnimation>
 
+        <ScrollAnimation delay={0.5}>
           <p className={cn("text-sm text-center", bodyColor)}>
             All add-ons are available with custom pricing based on your specific needs and usage requirements.
           </p>
+        </ScrollAnimation>
     </Section>
   );
 }

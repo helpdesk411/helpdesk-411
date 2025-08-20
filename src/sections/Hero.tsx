@@ -5,6 +5,7 @@ import { QuoteButton } from "@/components/QuoteButton";
 import { getHero } from "@/lib/design";
 import { useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
+import { ScrollAnimation, FadeIn, ScaleIn } from "@/components/ScrollAnimation";
 
 export function Hero() {
   const heroData = getHero();
@@ -23,25 +24,34 @@ export function Hero() {
         <Container>
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-black mb-4 md:mb-12 px-2 leading-tight">
-              Enterprise‑grade IT <span className="text-[#878787]">for small businesses</span> 
-            </h1>
+            <ScrollAnimation delay={0.2}>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-black mb-4 md:mb-12 px-2 leading-tight">
+                Enterprise‑grade IT <span className="text-[#878787]">for small businesses</span> 
+              </h1>
+            </ScrollAnimation>
             
             {/* Subheading */}
-            <p className="text-base md:text-xl text-[#737373] mb-6 md:mb-20 max-w-xl md:max-w-2xl mx-auto leading-relaxed font-light px-2">
-              Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused.
-            </p>
+            <ScrollAnimation delay={0.4}>
+              <p className="text-base md:text-xl text-[#737373] mb-6 md:mb-20 max-w-xl md:max-w-2xl mx-auto leading-relaxed font-light px-2">
+                Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused.
+              </p>
+            </ScrollAnimation>
 
-            <div className="flex justify-center w-full md:hidden mb-12">
-              <img src="/images/hero_mobile_a.svg" alt="Hero Image" className="w-full h-auto" />
-            </div>
+            <FadeIn delay={0.6}>
+              <div className="flex justify-center w-full md:hidden mb-12">
+                <img src="/images/hero_mobile_a.svg" alt="Hero Image" className="w-full h-auto" />
+              </div>
+            </FadeIn>
 
-            <div className="justify-center w-full hidden md:flex mb-12">
-              <img src="/images/hero_desktop_a.svg" alt="Hero Image" className="w-full h-auto" />
-            </div>
+            <FadeIn delay={0.6}>
+              <div className="justify-center w-full hidden md:flex mb-12">
+                <img src="/images/hero_desktop_a.svg" alt="Hero Image" className="w-full h-auto" />
+              </div>
+            </FadeIn>
             
             {/* CTA Buttons */}
-            <div className="w-full max-w-xs md:max-w-md mx-auto px-4 md:px-8 py-3 md:py-4 rounded-[36px] border border-white/40 backdrop-blur-[34px] bg-gradient-overlay">
+            <ScaleIn delay={0.8}>
+              <div className="w-full max-w-xs md:max-w-md mx-auto px-4 md:px-8 py-3 md:py-4 rounded-[36px] border border-white/40 backdrop-blur-[34px] bg-gradient-overlay">
               <div className="flex flex-row gap-3 md:gap-4 justify-center items-center mb-4 md:mb-8">
                 <img src="/images/user_1.svg" alt="User 1" className="w-8 md:w-12 h-auto" />
                 <p className="text-white text-xs md:text-base font-medium">HelpDesk 411</p>
@@ -64,6 +74,7 @@ export function Hero() {
                 </Button>
               </div>
             </div>
+            </ScaleIn>
           </div>
         </Container>
       </Section>
@@ -84,16 +95,21 @@ export function Hero() {
         <Container>
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
-            <h1 className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 px-2 leading-tight">
-              Enterprise‑grade IT for small businesses
-            </h1>
+            <ScrollAnimation delay={0.2}>
+              <h1 className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 px-2 leading-tight">
+                Enterprise‑grade IT for small businesses
+              </h1>
+            </ScrollAnimation>
             
             {/* Subheading */}
-            <p className="text-sm md:text-xl text-white mb-6 md:mb-20 max-w-xl md:max-w-2xl mx-auto leading-relaxed font-light px-2">
-              Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused.
-            </p>
+            <ScrollAnimation delay={0.4}>
+              <p className="text-sm md:text-xl text-white mb-6 md:mb-20 max-w-xl md:max-w-2xl mx-auto leading-relaxed font-light px-2">
+                Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused.
+              </p>
+            </ScrollAnimation>
 
-            <div className="flex flex-row gap-2 md:gap-4 max-w-sm mx-auto">
+            <ScaleIn delay={0.6}>
+              <div className="flex flex-row gap-2 md:gap-4 max-w-sm mx-auto">
                 <Button 
                   size="sm" 
                   href={heroData.primaryAction.href}
@@ -110,6 +126,7 @@ export function Hero() {
                   See Plans
                 </Button>
               </div>
+            </ScaleIn>
           </div>
         </Container>
 
@@ -134,16 +151,21 @@ export function Hero() {
         <Container className="max-w-7xl flex flex-col md:flex-row justify-between items-center px-0 pt-20 md:pt-40">
           <div className="w-full max-w-4xl mx-auto md:mb-0 mb-20">
             {/* Headline */}
-            <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
-              Enterprise‑grade IT for small businesses
-            </h1>
+            <ScrollAnimation delay={0.2}>
+              <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
+                Enterprise‑grade IT for small businesses
+              </h1>
+            </ScrollAnimation>
             
             {/* Subheading */}
-            <p className="text-sm md:text-xl text-white mb-6 md:mb-20 max-w-xl md:max-w-xl leading-6 md:leading-relaxed font-light ">
-             Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused. <span className="text-white font-medium">Clear communication, fast response times, and a support setup you can trust.</span>
-            </p>
+            <ScrollAnimation delay={0.4}>
+              <p className="text-sm md:text-xl text-white mb-6 md:mb-20 max-w-xl md:max-w-xl leading-6 md:leading-relaxed font-light ">
+               Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused. <span className="text-white font-medium">Clear communication, fast response times, and a support setup you can trust.</span>
+              </p>
+            </ScrollAnimation>
 
-            <div className="flex flex-row gap-2 md:gap-4 max-w-sm">
+            <ScaleIn delay={0.6}>
+              <div className="flex flex-row gap-2 md:gap-4 max-w-sm">
                 <QuoteButton 
                   size="sm" 
                   planName="Enterprise IT Support"
@@ -164,6 +186,7 @@ export function Hero() {
                   See Plans
                 </QuoteButton>
               </div>
+            </ScaleIn>
           </div>
           <div className="flex justify-center w-full md:w-5xl">
               <img src="/images/hero_c.svg" alt="Hero Image" className="h-full md:h-[500px] object-cover md:object-contain object-top" />

@@ -5,6 +5,7 @@ import { getPricing, type PricingPlan } from "@/lib/design";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
+import { ScrollAnimation, StaggerAnimation, ScaleIn } from "@/components/ScrollAnimation";
 
 interface PricingCardProps {
   plan: PricingPlan;
@@ -168,37 +169,49 @@ export function Pricing() {
           background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.40) 70.13%), #EA2427'
         }}
       >
-        <div className="text-center mb-16">
-          <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
-            What's Included
-          </h2>
-          <p className={cn("text-lg font-light max-w-2xl mx-auto", bodyColor)}>
-            Choose the right level of protection for your business. Every plan is designed to scale with your growth.
-          </p>
-        </div>
+        <ScrollAnimation>
+          <div className="text-center mb-16">
+            <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
+              What's Included
+            </h2>
+            <p className={cn("text-lg font-light max-w-2xl mx-auto", bodyColor)}>
+              Choose the right level of protection for your business. Every plan is designed to scale with your growth.
+            </p>
+          </div>
+        </ScrollAnimation>
         
-        <div className="grid md:grid-cols-3 gap-8 md:mb-12">
-          {pricingData.plans.map((plan, index) => (
-            <PricingCard key={index} plan={plan} pathname={pathname} />
-          ))}
-        </div>
+        <StaggerAnimation staggerDelay={0.2}>
+          <div className="grid md:grid-cols-3 gap-8 md:mb-12">
+            {pricingData.plans.map((plan, index) => (
+              <ScaleIn key={index} delay={index * 0.1}>
+                <PricingCard plan={plan} pathname={pathname} />
+              </ScaleIn>
+            ))}
+          </div>
+        </StaggerAnimation>
       </div>
     ) : (
       <Section id="pricing" className="px-4 py-10 md:px-8 md:py-20">
-        <div className="text-center mb-16">
-          <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
-            What's Included
-          </h2>
-          <p className={cn("text-lg font-light max-w-2xl mx-auto", bodyColor)}>
-            Choose the right level of protection for your business. Every plan is designed to scale with your growth.
-          </p>
-        </div>
+        <ScrollAnimation>
+          <div className="text-center mb-16">
+            <h2 className={cn("text-3xl font-light md:text-4xl lg:text-5xl mb-6", titleColor)}>
+              What's Included
+            </h2>
+            <p className={cn("text-lg font-light max-w-2xl mx-auto", bodyColor)}>
+              Choose the right level of protection for your business. Every plan is designed to scale with your growth.
+            </p>
+          </div>
+        </ScrollAnimation>
         
-        <div className="grid md:grid-cols-3 gap-8 md:mb-12">
-          {pricingData.plans.map((plan, index) => (
-            <PricingCard key={index} plan={plan} pathname={pathname} />
-          ))}
-        </div>
+        <StaggerAnimation staggerDelay={0.2}>
+          <div className="grid md:grid-cols-3 gap-8 md:mb-12">
+            {pricingData.plans.map((plan, index) => (
+              <ScaleIn key={index} delay={index * 0.1}>
+                <PricingCard plan={plan} pathname={pathname} />
+              </ScaleIn>
+            ))}
+          </div>
+        </StaggerAnimation>
       </Section>
     )}
     </div>
