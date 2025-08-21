@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Important pages
+Allow: /b
+Allow: /c
+
+# Static assets
+Allow: /images/
+Allow: /assets/
+
+# API endpoints (block from indexing but allow crawling)
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://helpdesk411.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to search engines)
+Crawl-delay: 1
