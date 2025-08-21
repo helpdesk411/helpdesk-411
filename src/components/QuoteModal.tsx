@@ -1,6 +1,6 @@
 // src/components/QuoteModal.tsx
 import { useEffect, useRef, useState } from "react";
-import { X, Minus, Plus, Star, CheckCircle2, AlertCircle } from "lucide-react";
+import { X, Minus, Plus, Star, CheckCircle2, AlertCircle, Info } from "lucide-react";
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -30,6 +30,14 @@ declare global {
 
 type ViewState = "form" | "success" | "error";
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  address?: string;
+  captcha?: string;
+  general?: string;
+}
+
 export function QuoteModal({
   isOpen,
   onClose,
@@ -45,6 +53,8 @@ export function QuoteModal({
   const [start] = useState(() => performance.now());
   const [view, setView] = useState<ViewState>("form");
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState({ name: false, email: false, address: false });
 
   const widgetRef = useRef<HTMLDivElement | null>(null);
 
@@ -56,6 +66,8 @@ export function QuoteModal({
     setView("form");
     setErrorMsg("");
     setToken("");
+    setFormErrors({});
+    setTouched({ name: false, email: false, address: false });
     // Render Turnstile when opening
     const el = widgetRef.current;
     if (el && window.turnstile) {
@@ -74,6 +86,65 @@ export function QuoteModal({
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    // Clear field-specific error when user starts typing
+    if (formErrors[field]) {
+      setFormErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+  };
+
+  const handleInputBlur = (field: keyof typeof formData) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    validateField(field, formData[field]);
+  };
+
+  const validateField = (field: keyof typeof formData, value: string) => {
+    const errors: FormErrors = {};
+    
+    switch (field) {
+      case 'name':
+        if (!value.trim()) {
+          errors.name = "Name is required";
+        } else if (value.trim().length < 2) {
+          errors.name = "Name must be at least 2 characters";
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          errors.email = "Email is required";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
+          errors.email = "Please enter a valid email address";
+        }
+        break;
+      case 'address':
+        if (!value.trim()) {
+          errors.address = "Address is required";
+        } else if (value.trim().length < 10) {
+          errors.address = "Please enter a complete address";
+        }
+        break;
+    }
+    
+    setFormErrors((prev) => ({ ...prev, ...errors }));
+    return Object.keys(errors).length === 0;
+  };
+
+  const validateForm = () => {
+    const errors: FormErrors = {};
+    let isValid = true;
+
+    // Validate each field
+    if (!validateField('name', formData.name)) isValid = false;
+    if (!validateField('email', formData.email)) isValid = false;
+    if (!validateField('address', formData.address)) isValid = false;
+
+    // Check captcha
+    if (!token) {
+      errors.captcha = "Please complete the security verification";
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
   };
 
   const resetForm = () => {
@@ -82,6 +153,8 @@ export function QuoteModal({
     setToken("");
     setView("form");
     setErrorMsg("");
+    setFormErrors({});
+    setTouched({ name: false, email: false, address: false });
     if (widgetRef.current && window.turnstile?.reset) window.turnstile.reset(widgetRef.current);
   };
 
@@ -92,9 +165,17 @@ export function QuoteModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token) return;
-    setLoading(true);
+    
+    // Clear previous errors
     setErrorMsg("");
+    setFormErrors({});
+    
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const honeypot =
@@ -116,16 +197,43 @@ export function QuoteModal({
       });
 
       const json = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(json.error || "Failed to submit");
+      
+      if (!r.ok) {
+        // Handle specific error responses
+        if (r.status === 429) {
+          throw new Error("Too many requests. Please wait a moment before trying again.");
+        } else if (r.status === 400) {
+          throw new Error(json.error || "Please check your information and try again.");
+        } else if (r.status === 502 || r.status === 503) {
+          throw new Error("Service temporarily unavailable. Please try again in a few moments.");
+        } else {
+          throw new Error(json.error || "Something went wrong. Please try again.");
+        }
+      }
 
       setView("success");
-    } catch (err: any) {
-      setErrorMsg(err?.message || "Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setErrorMsg(errorMessage);
       setView("error");
     } finally {
       setLoading(false);
       if (widgetRef.current && window.turnstile?.reset) window.turnstile.reset(widgetRef.current);
     }
+  };
+
+  const getFieldError = (field: keyof typeof formData) => {
+    return touched[field] && formErrors[field];
+  };
+
+  const getFieldClassName = (field: keyof typeof formData) => {
+    const baseClasses = "w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors";
+    const hasError = getFieldError(field);
+    
+    if (hasError) {
+      return `${baseClasses} border-red-300 focus:ring-red-500 focus:border-red-500`;
+    }
+    return `${baseClasses} border-gray-300 focus:ring-blue-500 focus:border-blue-500`;
   };
 
   if (!isOpen) return null;
@@ -192,45 +300,88 @@ export function QuoteModal({
 
               {/* Contact Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={formData.name}
-                  onChange={(e) => handleInputChange("name", e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Address"
-                  value={formData.address}
-                  onChange={(e) => handleInputChange("address", e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Name *"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    onBlur={() => handleInputBlur("name")}
+                    className={getFieldClassName("name")}
+                    required
+                  />
+                  {getFieldError("name") && (
+                    <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {formErrors.name}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Email *"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    onBlur={() => handleInputBlur("email")}
+                    className={getFieldClassName("email")}
+                    required
+                  />
+                  {getFieldError("email") && (
+                    <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {formErrors.email}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Address *"
+                    value={formData.address}
+                    onChange={(e) => handleInputChange("address", e.target.value)}
+                    onBlur={() => handleInputBlur("address")}
+                    className={getFieldClassName("address")}
+                    required
+                  />
+                  {getFieldError("address") && (
+                    <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {formErrors.address}
+                    </p>
+                  )}
+                </div>
 
                 {/* Honeypot: should stay empty */}
                 <input type="text" name="company_website" tabIndex={-1} autoComplete="off" style={{ display: "none" }} />
 
                 {/* Turnstile widget mounts here */}
-                <div ref={widgetRef} />
+                <div>
+                  <div ref={widgetRef} />
+                  {formErrors.captcha && (
+                    <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      {formErrors.captcha}
+                    </p>
+                  )}
+                </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+                  className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={!token || loading}
                 >
                   {loading ? "Sending…" : "Request a Quote"}
                 </button>
+
+                {/* Help text */}
+                <p className="text-xs text-gray-500 text-center flex items-center justify-center gap-1">
+                  <Info className="w-3 h-3" />
+                  We'll send you a confirmation email and contact you within 24 hours
+                </p>
               </form>
             </>
           )}
@@ -242,7 +393,7 @@ export function QuoteModal({
               </div>
               <h3 className="text-xl font-semibold text-black">Request received</h3>
               <p className="text-gray-700">
-                Thanks, <span className="font-medium">{formData.name.split(" ")[0]}</span>! We’ve emailed a receipt to{" "}
+                Thanks, <span className="font-medium">{formData.name.split(" ")[0]}</span>! We've emailed a receipt to{" "}
                 <span className="font-medium">{formData.email}</span>. Our team will follow up shortly.
               </p>
 
@@ -293,6 +444,24 @@ export function QuoteModal({
               </div>
               <h3 className="text-xl font-semibold text-black">Something went wrong</h3>
               <p className="text-gray-700">{errorMsg}</p>
+              
+              {/* Additional help for common errors */}
+              {errorMsg.includes("network") && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-left">
+                  <p className="text-sm text-blue-800">
+                    <strong>Network Issue:</strong> Please check your internet connection and try again.
+                  </p>
+                </div>
+              )}
+              
+              {errorMsg.includes("Too many requests") && (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-left">
+                  <p className="text-sm text-yellow-800">
+                    <strong>Rate Limited:</strong> Please wait a few moments before trying again.
+                  </p>
+                </div>
+              )}
+              
               <div className="flex gap-3">
                 <button
                   onClick={() => setView("form")}
