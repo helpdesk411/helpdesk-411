@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Main/Home Page -->
+  <url>
+    <loc>https://helpdesk411.com/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://helpdesk411.com/images/hero_desktop_a.svg</image:loc>
+      <image:title>HelpDesk 411 - IT Support for Small Businesses</image:title>
+      <image:caption>Professional IT support and managed services for small businesses</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://helpdesk411.com/images/logo.svg</image:loc>
+      <image:title>HelpDesk 411 Logo</image:title>
+      <image:caption>HelpDesk 411 company logo</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Business Solutions Page -->
+  <url>
+    <loc>https://helpdesk411.com/b</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helpdesk411.com/images/hero_b.svg</image:loc>
+      <image:title>Business IT Solutions</image:title>
+      <image:caption>Comprehensive IT solutions for growing businesses</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Corporate Services Page -->
+  <url>
+    <loc>https://helpdesk411.com/c</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://helpdesk411.com/images/hero_c.svg</image:loc>
+      <image:title>Corporate IT Services</image:title>
+      <image:caption>Enterprise-grade IT services for corporations</image:caption>
+    </image:image>
+  </url>
+</urlset>

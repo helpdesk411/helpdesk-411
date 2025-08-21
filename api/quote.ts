@@ -28,6 +28,22 @@ function splitName(full: string) {
     .split(/\s+/);
   return { first: parts[0] || "", last: parts.slice(1).join(" ") };
 }
+
+// Enhanced error messages
+const ERROR_MESSAGES = {
+  MISSING_FIELDS: "Please fill in all required fields (name, email, and address).",
+  INVALID_EMAIL: "Please enter a valid email address.",
+  HONEYPOT_TRIGGERED: "Invalid request detected. Please try again.",
+  TOO_FAST: "Please take a moment to fill out the form properly.",
+  CAPTCHA_FAILED: "Security verification failed. Please complete the captcha and try again.",
+  CAPTCHA_VERIFICATION_ERROR: "Unable to verify security check. Please try again.",
+  EMAIL_SEND_FAILED: "Unable to send confirmation email. Please try again or contact support.",
+  INVALID_DATA: "Invalid form data. Please check your information and try again.",
+  NETWORK_ERROR: "Network error. Please check your connection and try again.",
+  SERVER_ERROR: "Server error. Please try again in a few moments.",
+  RATE_LIMITED: "Too many requests. Please wait a moment before trying again.",
+} as const;
+
 async function sendEmail(payload: Record<string, unknown>) {
   const r = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -37,14 +53,26 @@ async function sendEmail(payload: Record<string, unknown>) {
     },
     body: JSON.stringify(payload),
   });
-  if (!r.ok) throw new Error(await r.text());
+  if (!r.ok) {
+    const errorText = await r.text();
+    console.error("Resend API error:", r.status, errorText);
+    throw new Error(ERROR_MESSAGES.EMAIL_SEND_FAILED);
+  }
+}
+
+// Email validation helper
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 module.exports = async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
-  if (req.method !== "POST") return res.status(405).end();
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
   try {
     const {
@@ -59,21 +87,52 @@ module.exports = async function handler(
     } = (req.body || {}) as any;
 
     const { name, email, address } = formData || {};
-    if (honeypot) return res.status(400).json({ error: "Bad request" });
-    if (
-      !name ||
-      !email ||
-      !address ||
-      !planName ||
-      !planPrice ||
-      !quantity ||
-      !totalPrice ||
-      !turnstileToken
-    ) {
-      return res.status(400).json({ error: "Missing fields" });
+
+    // Enhanced validation with specific error messages
+    if (honeypot) {
+      return res.status(400).json({ error: ERROR_MESSAGES.HONEYPOT_TRIGGERED });
     }
+
+    // Check for missing required fields
+    if (!name?.trim()) {
+      return res.status(400).json({ error: "Please enter your name." });
+    }
+    if (!email?.trim()) {
+      return res.status(400).json({ error: "Please enter your email address." });
+    }
+    if (!address?.trim()) {
+      return res.status(400).json({ error: "Please enter your address." });
+    }
+
+    // Validate email format
+    if (!isValidEmail(email.trim())) {
+      return res.status(400).json({ error: ERROR_MESSAGES.INVALID_EMAIL });
+    }
+
+    // Check for missing plan data
+    if (!planName || !planPrice || !quantity || !totalPrice) {
+      return res.status(400).json({ error: ERROR_MESSAGES.INVALID_DATA });
+    }
+
+    // Validate numeric fields
+    if (typeof planPrice !== 'number' || planPrice <= 0) {
+      return res.status(400).json({ error: ERROR_MESSAGES.INVALID_DATA });
+    }
+    if (typeof quantity !== 'number' || quantity <= 0 || quantity > 1000) {
+      return res.status(400).json({ error: "Please enter a valid quantity (1-1000)." });
+    }
+    if (typeof totalPrice !== 'number' || totalPrice !== planPrice * quantity) {
+      return res.status(400).json({ error: ERROR_MESSAGES.INVALID_DATA });
+    }
+
+    // Check for missing captcha token
+    if (!turnstileToken) {
+      return res.status(400).json({ error: "Please complete the security verification." });
+    }
+
+    // Rate limiting check
     if (typeof ttf === "number" && ttf < 1500) {
-      return res.status(400).json({ error: "Too fast" });
+      return res.status(429).json({ error: ERROR_MESSAGES.TOO_FAST });
     }
 
     // Verify Turnstile on server
@@ -85,14 +144,20 @@ module.exports = async function handler(
     });
     if (ip) verifyBody.set("remoteip", ip);
 
-    const vres = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: verifyBody,
-      }
-    );
+    let vres;
+    try {
+      vres = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: verifyBody,
+        }
+      );
+    } catch (error) {
+      console.error("Turnstile network error:", error);
+      return res.status(502).json({ error: ERROR_MESSAGES.NETWORK_ERROR });
+    }
 
     // Defensive parse (avoid JSON.parse HTML error)
     const vtext = await vres.text();
@@ -101,10 +166,13 @@ module.exports = async function handler(
       vjson = JSON.parse(vtext);
     } catch {
       console.error("Turnstile non-JSON:", vtext);
-      return res.status(502).json({ error: "Captcha verification failed" });
+      return res.status(502).json({ error: ERROR_MESSAGES.CAPTCHA_VERIFICATION_ERROR });
     }
-    if (!vjson.success)
-      return res.status(400).json({ error: "Captcha failed" });
+
+    if (!vjson.success) {
+      console.error("Turnstile verification failed:", vjson);
+      return res.status(400).json({ error: ERROR_MESSAGES.CAPTCHA_FAILED });
+    }
 
     const { first: firstName, last: lastName } = splitName(name);
 
@@ -157,7 +225,7 @@ Name: ${esc(firstName)}${lastName ? " " + esc(lastName) : ""}</p>
       subject: "Your Helpdesk Plan Quote Request",
       text: `Hi ${firstName},
 Thank you for requesting a quote for our Helpdesk Plan: ${planName}.
-Here’s a summary of your request:
+Here's a summary of your request:
 Quantity: ${quantity}
 
 Price per Device: $${planPrice}
@@ -175,7 +243,7 @@ Best regards,
 <p>Thank you for requesting a quote for our Helpdesk Plan: <b>${esc(
         planName
       )}</b>.</p>
-<p><b>Here’s a summary of your request:</b><br/>
+<p><b>Here's a summary of your request:</b><br/>
 Quantity: ${esc(String(quantity))}</p>
 <p>Price per Device: $${esc(String(planPrice))}</p>
 <p>Total Price: $${esc(String(totalPrice))}</p>
@@ -189,6 +257,16 @@ If you have any questions in the meantime, feel free to reply to this email.</p>
     return res.status(200).json({ ok: true });
   } catch (e: any) {
     console.error("quote function error:", e?.message || e);
-    return res.status(500).json({ error: e?.message || "Failed" });
+    
+    // Handle specific error types
+    if (e?.message?.includes('Resend')) {
+      return res.status(500).json({ error: ERROR_MESSAGES.EMAIL_SEND_FAILED });
+    }
+    
+    if (e?.message?.includes('fetch') || e?.message?.includes('network')) {
+      return res.status(503).json({ error: ERROR_MESSAGES.NETWORK_ERROR });
+    }
+    
+    return res.status(500).json({ error: ERROR_MESSAGES.SERVER_ERROR });
   }
 };
