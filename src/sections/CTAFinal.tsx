@@ -1,6 +1,7 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
+import { QuoteButton } from "@/components/QuoteButton";
 import { getCTAFinal } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
@@ -94,13 +95,15 @@ export function CTAFinal() {
               >
                 {ctaData.secondaryAction.label}
               </Button>
-              <Button 
+              <QuoteButton 
                 size="lg" 
-                href={ctaData.primaryAction.href}
+                planName="Enterprise IT Support"
+                planPrice={75}
+                planDescription="Professional IT support and managed services for small businesses"
                 className={cn("text-base text-white", primaryButtonBg)}
               >
                 {ctaData.primaryAction.label}
-              </Button>
+              </QuoteButton>
               </div>
             </ScaleIn>
           </div>
