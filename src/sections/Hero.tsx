@@ -56,21 +56,21 @@ export function Hero() {
                 <img src="/images/user_1.svg" alt="User 1" className="w-8 md:w-12 h-auto" />
                 <p className="text-white text-xs md:text-base font-medium">HelpDesk 411</p>
               </div>
-              <div className="flex flex-row gap-2 md:gap-4">
+              <div className="flex flex-row gap-2 md:gap-4 justify-center">
+                <Button 
+                  size="sm" 
+                  variant="secondary"
+                  href={heroData.secondaryAction.href}
+                  className="text-sm md:text-base text-white bg-[#878787] rounded-full px-6 h-10"
+                >
+                  See Plans
+                </Button>
                 <Button 
                   size="sm" 
                   href={heroData.primaryAction.href}
-                  className="text-sm md:text-base rounded-full flex-1 h-10"
+                  className="text-sm md:text-base rounded-full px-6 h-10"
                 >
                   Get a Quote
-                </Button>
-                  <Button 
-                    size="sm" 
-                    variant="secondary"
-                    href={heroData.secondaryAction.href}
-                    className="text-sm md:text-base  text-white bg-[#878787] rounded-full flex-1 h-10"
-                  >
-                  See Plans
                 </Button>
               </div>
             </div>
@@ -109,21 +109,21 @@ export function Hero() {
             </ScrollAnimation>
 
             <ScaleIn delay={0.6}>
-              <div className="flex flex-row gap-2 md:gap-4 max-w-sm mx-auto">
+              <div className="flex flex-row gap-2 md:gap-4 max-w-sm mx-auto justify-center">
+                <Button 
+                  size="sm" 
+                  variant="secondary"
+                  href={heroData.secondaryAction.href}
+                  className="text-sm md:text-base bg-white rounded-2xl px-6 h-8 md:h-12"
+                >
+                  See Plans
+                </Button>
                 <Button 
                   size="sm" 
                   href={heroData.primaryAction.href}
-                  className="text-sm md:text-base rounded-2xl flex-1 h-8 md:h-12"
+                  className="text-sm md:text-base rounded-2xl px-6 h-8 md:h-12"
                 >
                   Get a Quote
-                </Button>
-                  <Button 
-                    size="sm" 
-                    variant="secondary"
-                    href={heroData.secondaryAction.href}
-                    className="text-sm md:text-base bg-white rounded-2xl flex-1 h-8 md:h-12"
-                  >
-                  See Plans
                 </Button>
               </div>
             </ScaleIn>
@@ -165,25 +165,25 @@ export function Hero() {
             </ScrollAnimation>
 
             <ScaleIn delay={0.6}>
-              <div className="flex flex-row gap-2 md:gap-4 max-w-sm">
+              <div className="flex flex-row gap-2 md:gap-4 max-w-sm justify-center">
+                <QuoteButton 
+                  size="sm" 
+                  variant="secondary"
+                  planName="Enterprise IT Support"
+                  planPrice={50}
+                  planDescription="Enterprise-grade IT support for small businesses"
+                  className="text-sm text-white border border-white/40 md:text-base bg-transparent rounded-full px-6 h-12 md:h-12"
+                >
+                  See Plans
+                </QuoteButton>
                 <QuoteButton 
                   size="sm" 
                   planName="Enterprise IT Support"
                   planPrice={50}
                   planDescription="Enterprise-grade IT support for small businesses"
-                  className="text-sm md:text-base rounded-full flex-1 h-12 md:h-12"
+                  className="text-sm md:text-base rounded-full px-6 h-12 md:h-12"
                 >
                   Get a Quote
-                </QuoteButton>
-                  <QuoteButton 
-                    size="sm" 
-                    variant="secondary"
-                    planName="Enterprise IT Support"
-                    planPrice={50}
-                    planDescription="Enterprise-grade IT support for small businesses"
-                    className="text-sm text-white border border-white/40 md:text-base bg-transparent rounded-full flex-1 h-12 md:h-12"
-                  >
-                  See Plans
                 </QuoteButton>
               </div>
             </ScaleIn>

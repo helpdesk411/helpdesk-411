@@ -78,14 +78,7 @@ export function CTAFinal() {
             </ScrollAnimation>
             
             <ScaleIn delay={0.8}>
-              <div className="flex sm:flex-row gap-4">
-              <Button 
-                size="lg" 
-                href={ctaData.primaryAction.href}
-                className={cn("text-base text-white", primaryButtonBg)}
-              >
-                {ctaData.primaryAction.label}
-              </Button>
+              <div className="flex sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg" 
                 variant="outline"
@@ -100,6 +93,13 @@ export function CTAFinal() {
                 )}
               >
                 {ctaData.secondaryAction.label}
+              </Button>
+              <Button 
+                size="lg" 
+                href={ctaData.primaryAction.href}
+                className={cn("text-base text-white", primaryButtonBg)}
+              >
+                {ctaData.primaryAction.label}
               </Button>
               </div>
             </ScaleIn>

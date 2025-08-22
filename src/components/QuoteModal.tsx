@@ -461,13 +461,15 @@ export function QuoteModal({
                 <input type="text" name="company_website" tabIndex={-1} autoComplete="off" style={{ display: "none" }} />
 
                 {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!token || loading || captchaStatus === "expired" || captchaStatus === "error"}
-                >
-                  {loading ? "Sending…" : "Request a Quote"}
-                </button>
+                <div className="flex justify-end">
+                  <button
+                    type="submit"
+                    className="bg-black text-white py-3 px-8 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={!token || loading || captchaStatus === "expired" || captchaStatus === "error"}
+                  >
+                    {loading ? "Sending…" : "Request a Quote"}
+                  </button>
+                </div>
 
                 {/* Help text */}
                 <p className="text-xs text-gray-500 text-center flex items-center justify-center gap-1">
@@ -512,18 +514,18 @@ export function QuoteModal({
                 </div>
               </div>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={closeAndReset}
-                  className="flex-1 bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
-                >
-                  Close
-                </button>
+              <div className="flex gap-3 justify-end">
                 <button
                   onClick={resetForm}
-                  className="flex-1 border border-gray-300 text-black py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                  className="border border-gray-300 text-black py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors"
                 >
                   New request
+                </button>
+                <button
+                  onClick={closeAndReset}
+                  className="bg-black text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                >
+                  Close
                 </button>
               </div>
             </div>
@@ -537,18 +539,18 @@ export function QuoteModal({
               <h3 className="text-xl font-semibold text-black">Something went wrong</h3>
               <p className="text-gray-700">{errorMsg}</p>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setView("form")}
-                  className="flex-1 bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
-                >
-                  Try again
-                </button>
+              <div className="flex gap-3 justify-end">
                 <button
                   onClick={closeAndReset}
-                  className="flex-1 border border-gray-300 text-black py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                  className="border border-gray-300 text-black py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors"
                 >
                   Close
+                </button>
+                <button
+                  onClick={() => setView("form")}
+                  className="bg-black text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                >
+                  Try again
                 </button>
               </div>
             </div>
