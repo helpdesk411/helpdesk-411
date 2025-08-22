@@ -184,9 +184,26 @@ export function QuoteModal({
   };
 
   const closeAndReset = () => {
+    // Don't close if form is being submitted
+    if (loading) return;
+    
     resetForm();
     onClose();
   };
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeAndReset();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [isOpen, closeAndReset]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -215,7 +232,7 @@ export function QuoteModal({
         }),
       });
 
-      const json = await r.json().catch(() => ({} as any));
+      const json = await r.json().catch(() => ({} as Record<string, unknown>));
 
       if (!r.ok) {
         // Map CAPTCHA errors to inline captcha message so users know what happened
@@ -258,8 +275,14 @@ export function QuoteModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div 
+      className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 cursor-pointer"
+      onClick={closeAndReset}
+    >
+      <div 
+        className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto cursor-default"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex justify-between items-start p-6 border-b">
           <div className="flex items-center space-x-3">
