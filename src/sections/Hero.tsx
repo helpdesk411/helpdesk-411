@@ -65,13 +65,15 @@ export function Hero() {
                 >
                   See Plans
                 </Button>
-                <Button 
+                <QuoteButton 
                   size="sm" 
-                  href={heroData.primaryAction.href}
+                  planName="Enterprise IT Support"
+                  planPrice={75}
+                  planDescription="Professional IT support and managed services for small businesses"
                   className="text-sm md:text-base rounded-full px-6 h-10"
                 >
                   Get a Quote
-                </Button>
+                </QuoteButton>
               </div>
             </div>
             </ScaleIn>
@@ -118,13 +120,15 @@ export function Hero() {
                 >
                   See Plans
                 </Button>
-                <Button 
+                <QuoteButton 
                   size="sm" 
-                  href={heroData.primaryAction.href}
+                  planName="Enterprise IT Support"
+                  planPrice={75}
+                  planDescription="Professional IT support and managed services for small businesses"
                   className="text-sm md:text-base rounded-2xl px-6 h-8 md:h-12"
                 >
                   Get a Quote
-                </Button>
+                </QuoteButton>
               </div>
             </ScaleIn>
           </div>
@@ -166,21 +170,19 @@ export function Hero() {
 
             <ScaleIn delay={0.6}>
               <div className="flex flex-row gap-2 md:gap-4 max-w-sm justify-center">
-                <QuoteButton 
+                <Button 
                   size="sm" 
                   variant="secondary"
-                  planName="Enterprise IT Support"
-                  planPrice={50}
-                  planDescription="Enterprise-grade IT support for small businesses"
+                  href={heroData.secondaryAction.href}
                   className="text-sm text-white border border-white/40 md:text-base bg-transparent rounded-full px-6 h-12 md:h-12"
                 >
                   See Plans
-                </QuoteButton>
+                </Button>
                 <QuoteButton 
                   size="sm" 
                   planName="Enterprise IT Support"
-                  planPrice={50}
-                  planDescription="Enterprise-grade IT support for small businesses"
+                  planPrice={75}
+                  planDescription="Professional IT support and managed services for small businesses"
                   className="text-sm md:text-base rounded-full px-6 h-12 md:h-12"
                 >
                   Get a Quote
