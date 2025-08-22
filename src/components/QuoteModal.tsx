@@ -343,9 +343,13 @@ export function QuoteModal({
               {/* Contact Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    Full Name *
+                  </label>
                   <input
+                    id="name"
                     type="text"
-                    placeholder="Name *"
+                    placeholder="Enter your full name"
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
                     onBlur={() => handleInputBlur("name")}
@@ -361,9 +365,13 @@ export function QuoteModal({
                 </div>
 
                 <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address *
+                  </label>
                   <input
+                    id="email"
                     type="email"
-                    placeholder="Email *"
+                    placeholder="Enter your email address"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     onBlur={() => handleInputBlur("email")}
@@ -379,9 +387,13 @@ export function QuoteModal({
                 </div>
 
                 <div>
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                    Business Address *
+                  </label>
                   <input
+                    id="address"
                     type="text"
-                    placeholder="Address *"
+                    placeholder="Enter your business address"
                     value={formData.address}
                     onChange={(e) => handleInputChange("address", e.target.value)}
                     onBlur={() => handleInputBlur("address")}

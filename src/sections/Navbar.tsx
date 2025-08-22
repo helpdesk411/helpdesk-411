@@ -312,12 +312,9 @@ export function Navbar() {
             <div className="hidden lg:flex items-center space-x-8">
               <a
                 href="#home"
-                className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105 flex items-center space-x-1"
+                className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
               >
-                <span>Home</span>
-                <svg className="w-3 h-3 ml-1 transition-transform duration-200 ease-in-out group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
+                Home
               </a>
               <a
                 href="#features"
@@ -327,12 +324,9 @@ export function Navbar() {
               </a>
               <a
                 href="#pricing"
-                className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105 flex items-center space-x-1"
+                className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
               >
-                <span>Plans</span>
-                <svg className="w-3 h-3 ml-1 transition-transform duration-200 ease-in-out group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
+                Plans
               </a>
               <a
                 href="#addons"
