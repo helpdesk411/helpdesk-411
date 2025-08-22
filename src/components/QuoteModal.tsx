@@ -1,6 +1,6 @@
 // src/components/QuoteModal.tsx
 import { useEffect, useRef, useState } from "react";
-import { X, Minus, Plus, Star, CheckCircle2, AlertCircle, Info } from "lucide-react";
+import { X, Minus, Plus, Star, CheckCircle2, AlertCircle, Info, Shield, Loader2, RotateCcw } from "lucide-react";
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -20,6 +20,7 @@ declare global {
           sitekey: string;
           callback: (t: string) => void;
           "expired-callback"?: () => void;
+          "error-callback"?: () => void;
           appearance?: "always" | "execute" | "interaction-only";
         }
       ) => void;
@@ -29,6 +30,7 @@ declare global {
 }
 
 type ViewState = "form" | "success" | "error";
+type CaptchaStatus = "idle" | "loading" | "ready" | "verified" | "expired" | "error";
 
 interface FormErrors {
   name?: string;
@@ -55,6 +57,7 @@ export function QuoteModal({
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState({ name: false, email: false, address: false });
+  const [captchaStatus, setCaptchaStatus] = useState<CaptchaStatus>("idle");
 
   const widgetRef = useRef<HTMLDivElement | null>(null);
 
@@ -68,17 +71,51 @@ export function QuoteModal({
     setToken("");
     setFormErrors({});
     setTouched({ name: false, email: false, address: false });
+    setCaptchaStatus("loading");
+
     // Render Turnstile when opening
     const el = widgetRef.current;
     if (el && window.turnstile) {
       window.turnstile.render(el, {
         sitekey: import.meta.env.VITE_TURNSTILE_SITE_KEY as string,
-        appearance: "interaction-only",
-        callback: (t) => setToken(t),
-        "expired-callback": () => setToken(""),
+        appearance: "always", // <-- visible widget so users know it's there
+        callback: (t) => {
+          setToken(t);
+          setFormErrors((prev) => ({ ...prev, captcha: undefined }));
+          setCaptchaStatus("verified");
+        },
+        "expired-callback": () => {
+          setToken("");
+          setCaptchaStatus("expired");
+          setFormErrors((prev) => ({ ...prev, captcha: "Security check expired — please verify again." }));
+        },
+        "error-callback": () => {
+          setToken("");
+          setCaptchaStatus("error");
+          setFormErrors((prev) => ({ ...prev, captcha: "Security check failed to load. Please refresh it below." }));
+        },
       });
+
+      // If it takes >2s to go verified/ready, show "running check…" hint
+      const id = setTimeout(() => {
+        if (captchaStatus === "loading") setCaptchaStatus("ready");
+      }, 2000);
+      return () => clearTimeout(id);
+    } else {
+      // Script not loaded yet
+      setCaptchaStatus("error");
+      setFormErrors((prev) => ({ ...prev, captcha: "Security check unavailable. Please reload the form." }));
     }
   }, [isOpen]);
+
+  const refreshCaptcha = () => {
+    if (widgetRef.current && window.turnstile?.reset) {
+      setToken("");
+      setCaptchaStatus("loading");
+      window.turnstile.reset(widgetRef.current);
+      // after reset, Turnstile will invoke callbacks again
+    }
+  };
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity >= 1) setQuantity(newQuantity);
@@ -86,7 +123,6 @@ export function QuoteModal({
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear field-specific error when user starts typing
     if (formErrors[field]) {
       setFormErrors((prev) => ({ ...prev, [field]: undefined }));
     }
@@ -99,31 +135,20 @@ export function QuoteModal({
 
   const validateField = (field: keyof typeof formData, value: string) => {
     const errors: FormErrors = {};
-    
     switch (field) {
-      case 'name':
-        if (!value.trim()) {
-          errors.name = "Name is required";
-        } else if (value.trim().length < 2) {
-          errors.name = "Name must be at least 2 characters";
-        }
+      case "name":
+        if (!value.trim()) errors.name = "Name is required";
+        else if (value.trim().length < 2) errors.name = "Name must be at least 2 characters";
         break;
-      case 'email':
-        if (!value.trim()) {
-          errors.email = "Email is required";
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
-          errors.email = "Please enter a valid email address";
-        }
+      case "email":
+        if (!value.trim()) errors.email = "Email is required";
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) errors.email = "Please enter a valid email address";
         break;
-      case 'address':
-        if (!value.trim()) {
-          errors.address = "Address is required";
-        } else if (value.trim().length < 10) {
-          errors.address = "Please enter a complete address";
-        }
+      case "address":
+        if (!value.trim()) errors.address = "Address is required";
+        else if (value.trim().length < 10) errors.address = "Please enter a complete address";
         break;
     }
-    
     setFormErrors((prev) => ({ ...prev, ...errors }));
     return Object.keys(errors).length === 0;
   };
@@ -131,19 +156,18 @@ export function QuoteModal({
   const validateForm = () => {
     const errors: FormErrors = {};
     let isValid = true;
+    if (!validateField("name", formData.name)) isValid = false;
+    if (!validateField("email", formData.email)) isValid = false;
+    if (!validateField("address", formData.address)) isValid = false;
 
-    // Validate each field
-    if (!validateField('name', formData.name)) isValid = false;
-    if (!validateField('email', formData.email)) isValid = false;
-    if (!validateField('address', formData.address)) isValid = false;
-
-    // Check captcha
     if (!token) {
       errors.captcha = "Please complete the security verification";
       isValid = false;
+      // make sure users see the section
+      widgetRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
-    setFormErrors(errors);
+    setFormErrors((prev) => ({ ...prev, ...errors }));
     return isValid;
   };
 
@@ -155,6 +179,7 @@ export function QuoteModal({
     setErrorMsg("");
     setFormErrors({});
     setTouched({ name: false, email: false, address: false });
+    setCaptchaStatus("idle");
     if (widgetRef.current && window.turnstile?.reset) window.turnstile.reset(widgetRef.current);
   };
 
@@ -165,18 +190,12 @@ export function QuoteModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Clear previous errors
     setErrorMsg("");
     setFormErrors({});
-    
-    // Validate form
-    if (!validateForm()) {
-      return;
-    }
+
+    if (!validateForm()) return;
 
     setLoading(true);
-
     try {
       const honeypot =
         (document.querySelector('input[name="company_website"]') as HTMLInputElement)?.value || "";
@@ -196,19 +215,20 @@ export function QuoteModal({
         }),
       });
 
-      const json = await r.json().catch(() => ({}));
-      
+      const json = await r.json().catch(() => ({} as any));
+
       if (!r.ok) {
-        // Handle specific error responses
-        if (r.status === 429) {
-          throw new Error("Too many requests. Please wait a moment before trying again.");
-        } else if (r.status === 400) {
-          throw new Error(json.error || "Please check your information and try again.");
-        } else if (r.status === 502 || r.status === 503) {
-          throw new Error("Service temporarily unavailable. Please try again in a few moments.");
-        } else {
-          throw new Error(json.error || "Something went wrong. Please try again.");
+        // Map CAPTCHA errors to inline captcha message so users know what happened
+        const msg = String(json?.error || "");
+        if (r.status === 400 && /captcha|security/i.test(msg)) {
+          setFormErrors((prev) => ({ ...prev, captcha: msg || "Security check failed. Please try again." }));
+          setView("form");
+          widgetRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
         }
+        if (r.status === 429) throw new Error("Too many requests. Please wait a moment before trying again.");
+        if (r.status === 502 || r.status === 503) throw new Error("Service temporarily unavailable. Please try again soon.");
+        throw new Error(msg || "Something went wrong. Please try again.");
       }
 
       setView("success");
@@ -218,22 +238,21 @@ export function QuoteModal({
       setView("error");
     } finally {
       setLoading(false);
-      if (widgetRef.current && window.turnstile?.reset) window.turnstile.reset(widgetRef.current);
+      // If token was consumed or expired, prompt re-check
+      if (widgetRef.current && window.turnstile?.reset) {
+        window.turnstile.reset(widgetRef.current);
+        setToken("");
+        setCaptchaStatus("ready");
+      }
     }
   };
 
-  const getFieldError = (field: keyof typeof formData) => {
-    return touched[field] && formErrors[field];
-  };
-
+  const getFieldError = (field: keyof typeof formData) => touched[field] && formErrors[field];
   const getFieldClassName = (field: keyof typeof formData) => {
-    const baseClasses = "w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors";
-    const hasError = getFieldError(field);
-    
-    if (hasError) {
-      return `${baseClasses} border-red-300 focus:ring-red-500 focus:border-red-500`;
-    }
-    return `${baseClasses} border-gray-300 focus:ring-blue-500 focus:border-blue-500`;
+    const base = "w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors";
+    return getFieldError(field)
+      ? `${base} border-red-300 focus:ring-red-500 focus:border-red-500`
+      : `${base} border-gray-300 focus:ring-blue-500 focus:border-blue-500`;
   };
 
   if (!isOpen) return null;
@@ -354,25 +373,75 @@ export function QuoteModal({
                   )}
                 </div>
 
+                {/* Security check (Turnstile) */}
+                <div aria-live="polite" aria-atomic="true">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-800 mb-1">
+                    <Shield className="w-4 h-4" />
+                    Security check (required)
+                  </label>
+                  <div className="border border-gray-200 rounded-lg p-3">
+                    <div ref={widgetRef} />
+                    {/* Status helper text */}
+                    <div className="mt-2 text-xs text-gray-600 flex items-center gap-2">
+                      {captchaStatus === "loading" && (
+                        <>
+                          <Loader2 className="w-3 h-3 animate-spin" />
+                          Running a quick security check…
+                        </>
+                      )}
+                      {captchaStatus === "ready" && <>Please complete the check above to proceed.</>}
+                      {captchaStatus === "verified" && (
+                        <>
+                          <CheckCircle2 className="w-3 h-3 text-green-600" />
+                          Security check passed
+                        </>
+                      )}
+                      {captchaStatus === "expired" && (
+                        <>
+                          <AlertCircle className="w-3 h-3 text-red-600" />
+                          Security check expired — refresh below.
+                        </>
+                      )}
+                      {captchaStatus === "error" && (
+                        <>
+                          <AlertCircle className="w-3 h-3 text-red-600" />
+                          Security check failed to load — refresh below.
+                        </>
+                      )}
+                    </div>
+
+                    {formErrors.captcha && (
+                      <p className="text-red-600 text-xs mt-2 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        {formErrors.captcha}
+                      </p>
+                    )}
+
+                    <div className="mt-2">
+                      <button
+                        type="button"
+                        onClick={refreshCaptcha}
+                        className="inline-flex items-center gap-2 text-xs px-2 py-1 rounded border border-gray-300 hover:bg-gray-50"
+                      >
+                        <RotateCcw className="w-3 h-3" />
+                        Refresh security check
+                      </button>
+                    </div>
+
+                    <p className="text-[10px] text-gray-400 mt-2">
+                      Protected by Cloudflare Turnstile.
+                    </p>
+                  </div>
+                </div>
+
                 {/* Honeypot: should stay empty */}
                 <input type="text" name="company_website" tabIndex={-1} autoComplete="off" style={{ display: "none" }} />
-
-                {/* Turnstile widget mounts here */}
-                <div>
-                  <div ref={widgetRef} />
-                  {formErrors.captcha && (
-                    <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3" />
-                      {formErrors.captcha}
-                    </p>
-                  )}
-                </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
                   className="w-full bg-black text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!token || loading}
+                  disabled={!token || loading || captchaStatus === "expired" || captchaStatus === "error"}
                 >
                   {loading ? "Sending…" : "Request a Quote"}
                 </button>
@@ -444,24 +513,7 @@ export function QuoteModal({
               </div>
               <h3 className="text-xl font-semibold text-black">Something went wrong</h3>
               <p className="text-gray-700">{errorMsg}</p>
-              
-              {/* Additional help for common errors */}
-              {errorMsg.includes("network") && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-left">
-                  <p className="text-sm text-blue-800">
-                    <strong>Network Issue:</strong> Please check your internet connection and try again.
-                  </p>
-                </div>
-              )}
-              
-              {errorMsg.includes("Too many requests") && (
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-left">
-                  <p className="text-sm text-yellow-800">
-                    <strong>Rate Limited:</strong> Please wait a few moments before trying again.
-                  </p>
-                </div>
-              )}
-              
+
               <div className="flex gap-3">
                 <button
                   onClick={() => setView("form")}
