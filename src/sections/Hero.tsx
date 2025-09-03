@@ -138,7 +138,7 @@ export function Hero() {
           <div className="w-full max-w-4xl mx-auto md:mb-0 mb-20">
             {/* Headline */}
             <ScrollAnimation delay={0.2}>
-              <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
+              <h1 className="text-3xl sm:text-2xl md:text-3xl lg:text-5xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
                 Enterprise‑grade IT for small businesses
               </h1>
             </ScrollAnimation>
@@ -164,7 +164,7 @@ export function Hero() {
               </div>
             </ScaleIn>
           </div>
-          <div className="flex justify-center w-full md:w-5xl">
+          <div className="flex justify-center w-full md:w-6xl">
               <img src="/images/hero_c.svg" alt="Hero Image" className="h-full md:h-[500px] object-cover md:object-contain object-top" />
           </div>
         </Container>
