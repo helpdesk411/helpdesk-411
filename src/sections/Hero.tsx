@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
-import { QuoteButton } from "@/components/QuoteButton";
 import { getHero } from "@/lib/design";
 import { useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
@@ -65,15 +64,6 @@ export function Hero() {
                 >
                   See Plans
                 </Button>
-                <QuoteButton 
-                  size="sm" 
-                  planName="Enterprise IT Support"
-                  planPrice={75}
-                  planDescription="Professional IT support and managed services for small businesses"
-                  className="text-sm md:text-base rounded-full px-6 h-10"
-                >
-                  Get a Quote
-                </QuoteButton>
               </div>
             </div>
             </ScaleIn>
@@ -120,15 +110,7 @@ export function Hero() {
                 >
                   See Plans
                 </Button>
-                <QuoteButton 
-                  size="sm" 
-                  planName="Enterprise IT Support"
-                  planPrice={75}
-                  planDescription="Professional IT support and managed services for small businesses"
-                  className="text-sm md:text-base rounded-2xl px-6 h-8 md:h-12"
-                >
-                  Get a Quote
-                </QuoteButton>
+
               </div>
             </ScaleIn>
           </div>
@@ -156,7 +138,7 @@ export function Hero() {
           <div className="w-full max-w-4xl mx-auto md:mb-0 mb-20">
             {/* Headline */}
             <ScrollAnimation delay={0.2}>
-              <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-7xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
+              <h1 className="text-3xl sm:text-2xl md:text-3xl lg:text-5xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
                 Enterprise‑grade IT for small businesses
               </h1>
             </ScrollAnimation>
@@ -169,7 +151,7 @@ export function Hero() {
             </ScrollAnimation>
 
             <ScaleIn delay={0.6}>
-              <div className="flex flex-row gap-2 md:gap-4 max-w-sm justify-center">
+              <div className="flex flex-row gap-2 md:gap-4 max-w-sm justify-start">
                 <Button 
                   size="sm" 
                   variant="secondary"
@@ -178,19 +160,11 @@ export function Hero() {
                 >
                   See Plans
                 </Button>
-                <QuoteButton 
-                  size="sm" 
-                  planName="Enterprise IT Support"
-                  planPrice={75}
-                  planDescription="Professional IT support and managed services for small businesses"
-                  className="text-sm md:text-base rounded-full px-6 h-12 md:h-12"
-                >
-                  Get a Quote
-                </QuoteButton>
+
               </div>
             </ScaleIn>
           </div>
-          <div className="flex justify-center w-full md:w-5xl">
+          <div className="flex justify-center w-full md:w-6xl">
               <img src="/images/hero_c.svg" alt="Hero Image" className="h-full md:h-[500px] object-cover md:object-contain object-top" />
           </div>
         </Container>

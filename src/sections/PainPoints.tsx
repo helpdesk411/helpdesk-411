@@ -122,7 +122,7 @@ export function PainPoints() {
     "/": {
       sectionBg: "bg-[#F5F5F5]",
       titleColor: "text-[#333]",
-      highlightColor: "text-[#bababa]",
+      highlightColor: "text-[#8c8c8c]",
       subTintColor: "text-[#8C8C8C]"
     },
     "/b": {
@@ -134,7 +134,7 @@ export function PainPoints() {
     "/c": {
       sectionBg: "bg-white",
       titleColor: "text-[#333333]",
-      highlightColor: "text-[#bababa]",
+      highlightColor: "text-[#333333]",
       subTintColor: "text-[#333333]"
     },
   };

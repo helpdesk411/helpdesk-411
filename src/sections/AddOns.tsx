@@ -18,7 +18,7 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
   return (
     <div 
       className={cn(
-        "group bg-[#E8E8E8] relative p-5 md:p-10 transition-all duration-300 hover:shadow-lg",
+        "group bg-[#E8E8E8] relative p-5 md:p-10 transition-all duration-300 hover:shadow-lg flex flex-col h-full min-h-[300px]",
         isRouteB ? "rounded-[20px] border-0" : 
         isRouteC ? "rounded-2xl bg-gray-100" :
         "rounded-2xl border border-border"
@@ -48,7 +48,7 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
       </Badge>
 
       <h3 className={cn(
-        "md:w-2/4 text-xl md:text-2xl mb-4 md:mb-10 transition-colors",
+        "md:w-2/4 text-xl md:text-2xl mb-4 md:mb-10 transition-colors flex-grow",
         isRouteB 
           ? "text-white group-hover:text-red-400" 
           : isRouteC
@@ -61,7 +61,7 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
       
       {/* Image placeholder - Hidden for route C */}
       {!isRouteC && (
-        <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4 flex items-center justify-center overflow-hidden">
+        <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4 flex items-center justify-center overflow-hidden mt-auto">
           <div className="w-full h-full bg-muted/30 flex items-center justify-center">
             <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
           </div>
