@@ -18,7 +18,7 @@ function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
   
   return (
     <div className={cn(
-      "relative rounded-2xl border p-8 transition-all duration-300 hover:shadow-lg",
+      "relative rounded-2xl border p-8 transition-all duration-300 hover:shadow-lg flex flex-col h-full min-h-[600px]",
       isRouteB ? "bg-white border-gray-200" : 
       isRouteC ? "bg-white border-gray-200 shadow-lg" :
       "bg-card"
@@ -83,7 +83,7 @@ function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
         )}
       </div>
       
-      <ul className="space-y-4 mb-8">
+      <ul className="space-y-4 mb-8 flex-grow">
           {plan.features.map((feature, index) => (
             <li key={index} className="flex items-start space-x-3">
               <Check className={cn(
@@ -107,7 +107,7 @@ function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
       <QuoteButton 
         variant={plan.isFeatured ? "default" : "outline"}
         className={cn(
-          "w-full",
+          "w-full mt-auto",
           isRouteB && plan.isFeatured ? "bg-black text-white hover:bg-gray-800" : "",
           isRouteB && !plan.isFeatured ? "bg-gray-200 text-black hover:bg-gray-300" : "",
           isRouteC && plan.isFeatured ? "bg-black text-white hover:bg-gray-800" : "",

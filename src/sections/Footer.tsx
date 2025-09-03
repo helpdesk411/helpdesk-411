@@ -60,7 +60,8 @@ export function Footer() {
       backgroundImage: "url(/images/footer_bg.svg)",
       backgroundSize: "contain",
       backgroundPosition: "top center",
-      backgroundRepeat: "no-repeat"
+      backgroundRepeat: "no-repeat",
+      opacity: 0.3
     } : undefined}>
       <Section padding="lg">
         <Container>
