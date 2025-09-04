@@ -56,44 +56,30 @@ export function Navbar() {
   if (pathname === "/c") {
     return (
       <header className="sticky top-0 left-0 right-0 z-50 bg-transparent">
-        <div className="relative flex items-center justify-between px-6 py-4">
-          {/* Left side - Contact Button (Desktop) and Logo (Mobile) */}
+        <div className="relative flex items-center justify-between px-6">
+          {/* Left side - Contact Button (Desktop only) */}
           <div className="flex-1 flex items-center">
             <button className="hidden md:block bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors">
               Contact
             </button>
-            
-            {/* Logo - Visible on mobile, hidden on desktop */}
-            <div className="md:hidden">
-              <div className="bg-white rounded-full px-6 py-2 shadow-lg">
-                <div className="flex items-center space-x-2">
-                  <img 
-                    src="/images/logo_black.svg" 
-                    alt="Logo" 
-                    className="w-8 h-8"
-                  />
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Center - Logo with white rounded background (Desktop only) */}
-          <div className="hidden md:flex flex-1 justify-center">
+          {/* Center - Logo (Both desktop and mobile) */}
+          <div className="flex justify-center">
             <div className="relative">
-              {/* White rounded shape */}
-              <div className="bg-white rounded-full px-8 py-3 shadow-lg">
-                <div className="flex items-center space-x-2">
+              <div className="">
+                <div className="flex">
                   <img 
-                    src="/images/logo_black.svg" 
+                    src="/images/shape_wave_logo.svg" 
                     alt="Logo" 
-                    className="w-10 h-10"
+                    className="w-40 md:w-80"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right side - Navigation Links */}
+          {/* Right side - Navigation Links (Desktop) and Mobile menu button */}
           <div className="flex-1 flex justify-end">
             <div className="hidden md:flex items-center space-x-6">
               <a href="#home" className="text-white hover:text-gray-200 text-sm font-medium">
@@ -112,15 +98,15 @@ export function Navbar() {
                 Contact
               </a>
             </div>
+            
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden text-white transition-all duration-200 ease-in-out transform hover:scale-110"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={28} className="transition-all duration-200 ease-in-out" /> : <Menu size={28} className="transition-all duration-200 ease-in-out" />}
+            </button>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden text-white transition-all duration-200 ease-in-out transform hover:scale-110"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={28} className="transition-all duration-200 ease-in-out" /> : <Menu size={28} className="transition-all duration-200 ease-in-out" />}
-          </button>
         </div>
 
         {/* Mobile Menu Overlay */}
