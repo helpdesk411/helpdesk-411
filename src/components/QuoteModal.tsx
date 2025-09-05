@@ -266,10 +266,10 @@ export function QuoteModal({
 
   const getFieldError = (field: keyof typeof formData) => touched[field] && formErrors[field];
   const getFieldClassName = (field: keyof typeof formData) => {
-    const base = "w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors";
+    const base = "w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-colors hover:border-gray-400";
     return getFieldError(field)
-      ? `${base} border-red-300 focus:ring-red-500 focus:border-red-500`
-      : `${base} border-gray-300 focus:ring-blue-500 focus:border-blue-500`;
+      ? `${base} border-red-300 focus:ring-red-500 focus:border-red-500 hover:border-red-400`
+      : `${base} border-gray-300 focus:ring-blue-500 focus:border-blue-500 hover:border-gray-400`;
   };
 
   if (!isOpen) return null;
