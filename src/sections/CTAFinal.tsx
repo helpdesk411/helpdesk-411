@@ -1,16 +1,13 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
-import { Button } from "@/components/Button";
-import { getCTAFinal } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
-import { ScrollAnimation, FadeIn, ScaleIn } from "@/components/ScrollAnimation";
+import { ScrollAnimation, FadeIn } from "@/components/ScrollAnimation";
 import { FloatingRotating, HoverLift } from "@/components/AnimatedElements";
 
 export function CTAFinal() {
   const location = useLocation();
   const pathname = location.pathname;
-  const ctaData = getCTAFinal();
 
   // Define colors for each route
   const routeStyles: Record<string, { sectionBg: string; titleColor: string; subtitleColor: string; bodyColor: string; primaryButtonBg: string; secondaryButtonBg: string }> = {
@@ -41,7 +38,7 @@ export function CTAFinal() {
   };
 
   // fallback to home if route not in map
-  const { sectionBg, titleColor, bodyColor, primaryButtonBg, secondaryButtonBg } = routeStyles[pathname] || routeStyles["/"];
+  const { sectionBg, titleColor, bodyColor } = routeStyles[pathname] || routeStyles["/"];
 
   return (
     <Section id="contact" className={cn("py-12 md:py-20", sectionBg, pathname === "/b" ? "mx-4 rounded-t-2xl" : "")}>
