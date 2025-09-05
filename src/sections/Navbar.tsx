@@ -63,7 +63,6 @@ export function Navbar() {
               Contact
             </button>
           </div>
-
           {/* Center - Logo (Both desktop and mobile) */}
           <div className="flex justify-center">
             <div className="relative">
@@ -93,9 +92,6 @@ export function Navbar() {
               </a>
               <a href="#addons" className="text-white hover:text-gray-200 text-sm font-medium">
                 Add-Ons
-              </a>
-              <a href="#contact" className="text-white hover:text-gray-200 text-sm font-medium">
-                Contact
               </a>
             </div>
             
@@ -164,8 +160,12 @@ export function Navbar() {
     return (
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
         <div className="relative flex items-center justify-between px-6 py-4">
-          {/* Left spacer */}
-          <div className="flex-1"></div>
+          {/* Left side - Contact link */}
+          <div className="flex-1 flex items-center">
+            <a href="#contact" className="hidden md:block text-black hover:text-gray-700 text-sm font-medium">
+              Contact
+            </a>
+          </div>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex flex-1 items-center justify-end space-x-6">
@@ -181,9 +181,6 @@ export function Navbar() {
             <a href="#addons" className="text-black hover:text-gray-700 text-sm font-medium">
               Add-Ons
             </a>
-            <a href="#contact" className="text-black hover:text-gray-700 text-sm font-medium">
-              Contact
-            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -196,13 +193,12 @@ export function Navbar() {
         </div>
 
         {/* Circular cutout & logo */}
-        <div className="absolute left-1/2 -bottom-8 transform -translate-x-1/2">
-          {/* White circle that overlaps navbar to create cutout */}
-          <div className="relative w-20 h-20 bg-white rounded-full flex items-center justify-center">
+        <div className="absolute left-1/2 top-9 md:top-4 transform -translate-x-1/2">
+          <div className="relative flex justify-center">
             <img
-              src="/images/logo_black.svg"
+              src="/images/logo_b.svg"
               alt="Logo"
-              className="w-12 h-12 object-contain"
+              className="w-40 md:w-60 object-contain"
             />
           </div>
         </div>
@@ -354,57 +350,58 @@ export function Navbar() {
         </nav>
 
         {/* Mobile Menu Overlay */}
-        <div className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-          <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${isOpen ? 'bg-opacity-50' : 'bg-opacity-0'}`} onClick={() => setIsOpen(false)}></div>
-          <div className={`bg-white h-full w-64 shadow-2xl absolute right-0 transform transition-all duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-            <div className="flex justify-between items-center p-6 border-b">
-              <span className="text-lg font-semibold">Menu</span>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-black hover:text-gray-700 transition-all duration-200 ease-in-out transform hover:scale-110 hover:rotate-90"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            <div className="p-6 space-y-4">
-              <a 
-                href="#home" 
-                className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </a>
-              <a 
-                href="#features" 
-                className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
-                onClick={() => setIsOpen(false)}
-              >
-                Features
-              </a>
-              <a 
-                href="#pricing" 
-                className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
-                onClick={() => setIsOpen(false)}
-              >
-                Plans
-              </a>
-              <a 
-                href="#addons" 
-                className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
-                onClick={() => setIsOpen(false)}
-              >
-                Add-Ons
-              </a>
-              <a 
-                href="#contact" 
-                className="block text-black hover:text-gray-700 text-lg transition-all duration-200 ease-in-out transform hover:translate-x-1 hover:scale-105"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </a>
+        {isOpen && (
+          <div className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-[60] transition-opacity duration-300">
+            <div className={`bg-white w-full shadow-lg fixed top-0 left-0 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-y-0' : '-translate-y-full'}`} style={{minHeight: '100vh'}}>
+              <div className="flex justify-between items-center p-6 border-b">
+                <span className="text-lg font-semibold">Menu</span>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="text-black hover:text-gray-700"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <div className="p-6 space-y-4">
+                <a 
+                  href="#home" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
+                </a>
+                <a 
+                  href="#features" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Features
+                </a>
+                <a 
+                  href="#pricing" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Plans
+                </a>
+                <a 
+                  href="#addons" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Add-Ons
+                </a>
+                <a 
+                  href="#contact" 
+                  className="block text-black hover:text-gray-700 text-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Contact
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </header>
 
       {/* Floating indicator when navbar is hidden */}
