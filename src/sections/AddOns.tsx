@@ -15,57 +15,95 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
   const isRouteB = pathname === "/b";
   const isRouteC = pathname === "/c";
   
+  // Map card badges to their corresponding new icons for route C
+  const getIconForRouteC = (badge: string) => {
+    switch (badge) {
+      case "Onsite Visits":
+        return "images/onsite_visits.svg";
+      case "Emergency Response":
+        return "images/emergency_response.svg";
+      case "After-Hours Support":
+        return "images/after_hour_support.svg";
+      case "Hardware Procurement":
+        return "images/hardware_procurement.svg";
+      case "Compliance Support":
+        return "images/compliance_support.svg";
+      default:
+        return card.image;
+    }
+  };
+  
   return (
     <div 
       className={cn(
         "group bg-[#E8E8E8] relative p-5 md:p-10 transition-all duration-300 hover:shadow-lg flex flex-col h-full min-h-[300px]",
         isRouteB ? "rounded-[20px] border-0" : 
-        isRouteC ? "rounded-2xl bg-gray-100" :
+        isRouteC ? "rounded-2xl bg-[#F5F5F5]" :
         "rounded-2xl border border-border"
       )}
       style={isRouteB ? {
         background: 'linear-gradient(180deg, rgba(140, 140, 140, 0.41) 0%, rgba(38, 38, 38, 0.30) 100%)'
       } : {}}
     >
-      <Badge 
-        variant="accent" 
-        className={cn(
-          "rounded-full font-light mb-4 md:mb-8 p-2 px-4 shadow-none flex items-center gap-2 w-fit",
-          isRouteB 
-            ? "bg-white text-black" 
-            : isRouteC
-            ? "bg-white"
-            : "bg-white text-accent-foreground"
-        )}
-      >
-        <MapPin 
-          size={16} 
-          className={cn(
-            isRouteB ? "text-black" : "text-red-500"
-          )}
-        />
-        {card.badge}
-      </Badge>
-
-      <h3 className={cn(
-        "md:w-2/4 text-xl md:text-2xl mb-4 md:mb-10 transition-colors flex-grow",
-        isRouteB 
-          ? "text-white group-hover:text-red-400" 
-          : isRouteC
-          ? "text-[#333333] font-light text-3xl group-hover:text-[#666666]"
-          : "text-[#4d4d4d] group-hover:text-primary"
-      )}>
-        {card.title}
-      </h3>
-
-      
-      {/* Image placeholder - Hidden for route C */}
-      {!isRouteC && (
-        <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4 flex items-center justify-center overflow-hidden mt-auto">
-          <div className="w-full h-full bg-muted/30 flex items-center justify-center">
-            <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+      {isRouteC ? (
+        // Route C layout: Icon at top-left, title below, description at bottom
+        <div className="flex flex-col">
+          {/* Red icon at top-left */}
+          <div className="mb-8">
+            <img 
+              src={getIconForRouteC(card.badge || "")} 
+              alt={card.badge} 
+              className="w-12 h-12"
+            />
           </div>
+          
+          {/* Title */}
+          <h3 className="text-[#333333] font-medium text-2xl mb-4">
+            {card.badge}
+          </h3>
+          
+          {/* Description */}
+          <p className="text-[#666666] text-xl leading-relaxed">
+            {card.title}
+          </p>
         </div>
+      ) : (
+        // Original layout for routes A and B
+        <>
+          <Badge 
+            variant="accent" 
+            className={cn(
+              "rounded-full font-light mb-4 md:mb-8 p-2 px-4 shadow-none flex items-center gap-2 w-fit",
+              isRouteB 
+                ? "bg-white text-black" 
+                : "bg-white text-accent-foreground"
+            )}
+          >
+            <MapPin 
+              size={16} 
+              className={cn(
+                isRouteB ? "text-black" : "text-red-500"
+              )}
+            />
+            {card.badge}
+          </Badge>
+
+          <h3 className={cn(
+            "md:w-2/4 text-xl md:text-2xl mb-4 md:mb-10 transition-colors flex-grow",
+            isRouteB 
+              ? "text-white group-hover:text-red-400" 
+              : "text-[#4d4d4d] group-hover:text-primary"
+          )}>
+            {card.title}
+          </h3>
+
+          {/* Image placeholder */}
+          <div className="aspect-video rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 mb-4 flex items-center justify-center overflow-hidden mt-auto">
+            <div className="w-full h-full bg-muted/30 flex items-center justify-center">
+              <img src={card.image} alt={card.title} className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
@@ -116,7 +154,7 @@ export function AddOns() {
         
         <StaggerAnimation staggerDelay={0.15}>
           {/* First row - 3 cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-6">
+          <div className={cn("grid md:grid-cols-3 gap-6 mb-6", pathname === "/c" ? "md:px-40" : "")}>
             {addOnsData.cards.slice(0, 3).map((card, index) => (
               <ScaleIn key={index} delay={index * 0.1}>
                 <AddOnCardComponent card={card} pathname={pathname} />
@@ -127,7 +165,7 @@ export function AddOns() {
           
         <StaggerAnimation staggerDelay={0.15}>
           {/* Second row - 2 cards taking 50% each */}
-          <div className="grid md:grid-cols-2 gap-6 mb-10 md:mb-20">
+          <div className={cn("grid md:grid-cols-2 gap-6 mb-10 md:mb-20", pathname === "/c" ? "md:px-40" : "")}>
             {addOnsData.cards.slice(3, 5).map((card, index) => (
               <ScaleIn key={index + 3} delay={index * 0.1}>
                 <AddOnCardComponent card={card} pathname={pathname} />

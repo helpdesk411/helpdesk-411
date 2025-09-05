@@ -13,7 +13,6 @@ import {
 import { useLocation } from "react-router-dom";
 
 
-
 // Pain points data matching the screenshot
 const painPointsData = [
   {
