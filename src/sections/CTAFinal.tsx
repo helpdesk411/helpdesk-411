@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
-import { QuoteButton } from "@/components/QuoteButton";
 import { getCTAFinal } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
@@ -78,34 +77,6 @@ export function CTAFinal() {
               </p>
             </ScrollAnimation>
             
-            <ScaleIn delay={0.8}>
-              <div className="flex sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                variant="outline"
-                href={ctaData.secondaryAction.href}
-                className={cn(
-                  "text-base", 
-                  pathname === "/b" 
-                    ? "bg-white text-black hover:bg-gray-100" 
-                    : pathname === "/c"
-                    ? "bg-white text-black hover:bg-gray-100"
-                    : secondaryButtonBg
-                )}
-              >
-                {ctaData.secondaryAction.label}
-              </Button>
-              <QuoteButton 
-                size="lg" 
-                planName="Enterprise IT Support"
-                planPrice={75}
-                planDescription="Professional IT support and managed services for small businesses"
-                className={cn("text-base text-white", primaryButtonBg)}
-              >
-                {ctaData.primaryAction.label}
-              </QuoteButton>
-              </div>
-            </ScaleIn>
           </div>
         
       </Container>

@@ -1,5 +1,5 @@
 import { Section } from "@/components/Section";
-import { QuoteButton } from "@/components/QuoteButton";
+import { Button } from "@/components/Button";
 import { Badge } from "@/components/Badge";
 import { getPricing, type PricingPlan } from "@/lib/design";
 import { Check } from "lucide-react";
@@ -104,7 +104,7 @@ function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
           ))}
       </ul>
       
-      <QuoteButton 
+      <Button 
         variant={plan.isFeatured ? "default" : "outline"}
         className={cn(
           "w-full mt-auto",
@@ -114,13 +114,10 @@ function PricingCard({ plan, pathname = "/" }: PricingCardProps) {
           isRouteC && !plan.isFeatured ? "bg-white text-[#333333] border-gray-300 hover:bg-gray-100" : ""
         )}
         size="lg"
-        planName={plan.name}
-        planPrice={plan.price}
-        planDescription={plan.highlight || plan.subHighlight || ""}
-        isPopular={plan.isFeatured}
+        href={plan.cta.href}
       >
         {plan.cta.label}
-      </QuoteButton>
+      </Button>
     </div>
   );
 }
