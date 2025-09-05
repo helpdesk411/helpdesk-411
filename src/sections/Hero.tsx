@@ -135,17 +135,17 @@ export function Hero() {
       <Section id="home" className="pt-0 md:pt-0 px-4 pb-0 md:pb-40 flex flex-col items-stretch">
         <Navbar />
         <Container className="max-w-7xl flex flex-col md:flex-row justify-between items-center px-0 pt-20 md:pt-40">
-          <div className="w-full max-w-4xl mx-auto md:mb-0 mb-20">
+          <div className="w-full md:w-2/5 mx-auto md:mb-0 mb-20">
             {/* Headline */}
             <ScrollAnimation delay={0.2}>
-              <h1 className="text-3xl sm:text-2xl md:text-3xl lg:text-5xl font-normal tracking-tight text-white mb-4 md:mb-12 leading-tight">
+              <h1 className="text-3xl sm:text-2xl md:text-2xl lg:text-5xl font-normal tracking-tight text-white mb-4 md:mb-8 leading-tight">
                 Enterprise‑grade IT for small businesses
               </h1>
             </ScrollAnimation>
             
             {/* Subheading */}
             <ScrollAnimation delay={0.4}>
-              <p className="text-sm md:text-xl text-white mb-6 md:mb-20 max-w-xl md:max-w-xl leading-6 md:leading-relaxed font-light ">
+              <p className="text-sm md:text-base text-white mb-6 md:mb-12 max-w-xl leading-6 font-light ">
                Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused. <span className="text-white font-medium">Clear communication, fast response times, and a support setup you can trust.</span>
               </p>
             </ScrollAnimation>
@@ -156,7 +156,7 @@ export function Hero() {
                   size="sm" 
                   variant="secondary"
                   href={heroData.secondaryAction.href}
-                  className="text-sm text-white border border-white/40 md:text-base bg-transparent rounded-full px-6 h-12 md:h-12"
+                  className="text-sm text-black border border-white/40 md:text-base bg-white rounded-full px-8 h-12 md:h-12"
                 >
                   See Plans
                 </Button>
@@ -164,8 +164,8 @@ export function Hero() {
               </div>
             </ScaleIn>
           </div>
-          <div className="flex justify-center w-full md:w-6xl">
-              <img src="/images/hero_c.svg" alt="Hero Image" className="h-full md:h-[500px] object-cover md:object-contain object-top" />
+          <div className="flex justify-center w-full md:w-3/5">
+              <img src="/images/hero_c.svg" alt="Hero Image" className="h-full md:h-[600px] object-cover md:object-contain object-top" />
           </div>
         </Container>
 

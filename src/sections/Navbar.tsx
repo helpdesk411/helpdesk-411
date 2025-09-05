@@ -93,9 +93,6 @@ export function Navbar() {
               <a href="#addons" className="text-white hover:text-gray-200 text-sm font-medium">
                 Add-Ons
               </a>
-              <a href="#contact" className="text-white hover:text-gray-200 text-sm font-medium">
-                Contact
-              </a>
             </div>
             
             {/* Mobile menu button */}
@@ -163,8 +160,12 @@ export function Navbar() {
     return (
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
         <div className="relative flex items-center justify-between px-6 py-4">
-          {/* Left spacer */}
-          <div className="flex-1"></div>
+          {/* Left side - Contact link */}
+          <div className="flex-1 flex items-center">
+            <a href="#contact" className="hidden md:block text-black hover:text-gray-700 text-sm font-medium">
+              Contact
+            </a>
+          </div>
 
           {/* Desktop nav links */}
           <div className="hidden md:flex flex-1 items-center justify-end space-x-6">
@@ -180,9 +181,6 @@ export function Navbar() {
             <a href="#addons" className="text-black hover:text-gray-700 text-sm font-medium">
               Add-Ons
             </a>
-            <a href="#contact" className="text-black hover:text-gray-700 text-sm font-medium">
-              Contact
-            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -195,13 +193,12 @@ export function Navbar() {
         </div>
 
         {/* Circular cutout & logo */}
-        <div className="absolute left-1/2 -bottom-8 transform -translate-x-1/2">
-          {/* White circle that overlaps navbar to create cutout */}
-          <div className="relative w-20 h-20 bg-white rounded-full flex items-center justify-center">
+        <div className="absolute left-1/2 top-9 md:top-4 transform -translate-x-1/2">
+          <div className="relative flex justify-center">
             <img
-              src="/images/logo_black.svg"
+              src="/images/logo_b.svg"
               alt="Logo"
-              className="w-12 h-12 object-contain"
+              className="w-40 md:w-60 object-contain"
             />
           </div>
         </div>
