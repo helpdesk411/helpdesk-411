@@ -1,5 +1,8 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
+import { Button } from "@/components/Button";
+import { QuoteButton } from "@/components/QuoteButton";
+import { getCTAFinal } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
 import { ScrollAnimation, FadeIn } from "@/components/ScrollAnimation";
@@ -8,6 +11,7 @@ import { FloatingRotating, HoverLift } from "@/components/AnimatedElements";
 export function CTAFinal() {
   const location = useLocation();
   const pathname = location.pathname;
+  const ctaData = getCTAFinal();
 
   // Define colors for each route
   const routeStyles: Record<string, { sectionBg: string; titleColor: string; subtitleColor: string; bodyColor: string; primaryButtonBg: string; secondaryButtonBg: string }> = {
@@ -46,7 +50,7 @@ export function CTAFinal() {
           {/* Content */}
           <ScrollAnimation delay={0.2}>
             <h2 className={cn("md:w-3/4 mx-auto text-center text-3xl md:text-4xl lg:text-5xl font-bold md:mb-6", titleColor)}>
-              If your IT setup is built on hope, <span className="text-[#bababa]">it's only a matter of time.</span>
+              {ctaData.headline}
             </h2>
           </ScrollAnimation>
           
@@ -70,10 +74,35 @@ export function CTAFinal() {
           <div className="flex flex-col items-center">
             <ScrollAnimation delay={0.6}>
               <p className={cn("md:w-2/3 text-center text-lg mb-8 leading-relaxed mx-auto", bodyColor)}>
-                Let's take this off your plate, lock down your infrastructure, and help your business move faster with fewer risks.
+                {ctaData.subcopy}
               </p>
             </ScrollAnimation>
             
+            {/* Action Buttons */}
+            <ScrollAnimation delay={0.8}>
+              <div className="flex flex-col sm:flex-row gap-4 items-center">
+                <QuoteButton
+                  variant="default"
+                  size="lg"
+                  className={cn("px-8 py-3", routeStyles[pathname]?.primaryButtonBg || "bg-red-500 text-white hover:bg-red-600")}
+                  planName="Custom Quote"
+                  planPrice={75}
+                  planDescription="Get a personalized quote for your business needs"
+                  isPopular={false}
+                >
+                  {ctaData.primaryAction.label}
+                </QuoteButton>
+                
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className={cn("px-8 py-3", routeStyles[pathname]?.secondaryButtonBg || "bg-white border border-gray-300 text-black hover:bg-gray-50")}
+                  href={ctaData.secondaryAction.href}
+                >
+                  {ctaData.secondaryAction.label}
+                </Button>
+              </div>
+            </ScrollAnimation>
           </div>
         
       </Container>
