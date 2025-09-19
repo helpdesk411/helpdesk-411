@@ -77,32 +77,6 @@ export function CTAFinal() {
                 {ctaData.subcopy}
               </p>
             </ScrollAnimation>
-            
-            {/* Action Buttons */}
-            <ScrollAnimation delay={0.8}>
-              <div className="flex flex-col sm:flex-row gap-4 items-center">
-                <QuoteButton
-                  variant="default"
-                  size="lg"
-                  className={cn("px-8 py-3", routeStyles[pathname]?.primaryButtonBg || "bg-red-500 text-white hover:bg-red-600")}
-                  planName="Custom Quote"
-                  planPrice={75}
-                  planDescription="Get a personalized quote for your business needs"
-                  isPopular={false}
-                >
-                  {ctaData.primaryAction.label}
-                </QuoteButton>
-                
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className={cn("px-8 py-3", routeStyles[pathname]?.secondaryButtonBg || "bg-white border border-gray-300 text-black hover:bg-gray-50")}
-                  href={ctaData.secondaryAction.href}
-                >
-                  {ctaData.secondaryAction.label}
-                </Button>
-              </div>
-            </ScrollAnimation>
           </div>
         
       </Container>
