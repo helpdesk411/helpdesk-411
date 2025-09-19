@@ -109,8 +109,8 @@
         "variant": "default"
       },
       "secondaryAction": {
-        "label": "Schedule a call",
-        "href": "#contact",
+        "label": "See Plans",
+        "href": "#pricing",
         "variant": "secondary"
       },
       "embeds": {
