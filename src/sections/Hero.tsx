@@ -42,7 +42,7 @@ export function Hero() {
             <div className="hidden md:block mt-12 md:mt-8">
               <div className="flex items-start gap-2">
                 <img className="mt-14 w-1/2" src="./images/chat_bubble_d_left.svg" alt="" />
-                <img className="max-w-1/2" src="./images/chat_bubble_d_right.svg" alt="" />
+                <img className="max-w-2/5" src="./images/chat_bubble_d_right.svg" alt="" />
               </div>
             </div>
 
