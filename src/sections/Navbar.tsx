@@ -69,7 +69,7 @@ export function Navbar() {
               : "mt-8 md:mt-12 bg-black/90 backdrop-blur-sm"
           )}
         >
-          <div className="flex h-16 items-center justify-between pr-4 pl-12">
+          <div className="flex h-16 items-center justify-between px-4">
             {/* Brand */}
             <a 
               href="/" 
