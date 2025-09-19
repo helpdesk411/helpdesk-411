@@ -14,8 +14,8 @@ export function Hero() {
           backgroundImage: 'url(/images/hero_bg_3.svg)'
         }}
       >
-      <Section id="home" className="min-h-screen pt-44 md:pt-32 pb-0 md:pb-0 px-4 flex">
-        <Container>
+      <Section id="home" className="min-h-screen pt-36 md:pt-32 pb-0 md:pb-0 px-4 flex">
+        <Container className="px-0">
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
             <ScrollAnimation delay={0.2}>
@@ -29,32 +29,20 @@ export function Hero() {
               <p className="text-base md:text-xl text-[#737373] mb-6 md:mb-6 max-w-xl md:max-w-2xl mx-auto leading-relaxed font-light px-2">
                 Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused.
               </p>
+            </ScrollAnimation>
+
+            <div className="md:flex items-start justify-center w-full mt-8 h-[200px] md:h-[400px] relative">
               <Button 
                 size="sm" 
-                variant="secondary"
+                variant="default"
                 href={heroData.secondaryAction.href}
-                className="text-sm md:text-base text-white bg-black rounded-full px-12 h-10"
+                className="text-sm md:text-base text-white bg-black rounded-full px-8 h-10 md:px-16 md:h-16 md:absolute top-[94px] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 mb-4 md:0 hover:bg-white hover:text-black transition-all duration-300 ease-in-out"
               >
                 See Plans
               </Button>
-            </ScrollAnimation>
+              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block w-full object-cover mx-auto" />
 
-            <div className="hidden md:block mt-12 md:mt-8">
-              <div className="flex items-start gap-2">
-                <img className="mt-14 w-1/2" src="./images/chat_bubble_d_left.svg" alt="" />
-                <img className="max-w-2/5" src="./images/chat_bubble_d_right.svg" alt="" />
-              </div>
-            </div>
-
-            <div className="block md:hidden">
-              <div className="flex flex-col items-start gap-2">
-                <img className="mt-14" src="./images/chat_bubble_m_left.svg" alt="" />
-                <img src="./images/chat_bubble_m_right.svg" alt="" />
-              </div>
-            </div>
-
-            <div className="flex justify-center w-full mt-8">
-              <img src="./images/new_hero_image_1.svg" alt="Hero Image" className="w-full max-w-md object-contain mx-auto" />
+              <img src="./images/hero_cover_mobile_2.png" alt="Hero Image" className="block md:hidden w-full object-cover mx-auto" />
             </div>
           </div>
         </Container>
