@@ -31,7 +31,7 @@ export function Hero() {
               </p>
             </ScrollAnimation>
 
-            <div className="md:flex items-start justify-center w-full mt-8 h-[200px] md:h-[400px] relative">
+            <div className="md:flex items-start justify-center w-full mt-8 h-[400px] relative">
               <Button 
                 size="sm" 
                 variant="default"
