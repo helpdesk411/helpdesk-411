@@ -31,16 +31,16 @@ export function Hero() {
               </p>
             </ScrollAnimation>
 
-            <div className="md:flex items-start justify-center w-full mt-8 h-[400px] relative">
+            <div className="md:flex items-start justify-center max-w-2xl mx-auto mt-8 h-[400px] relative">
               <Button 
                 size="sm" 
                 variant="default"
                 href={heroData.secondaryAction.href}
-                className="text-sm md:text-base text-white bg-black rounded-full px-8 h-10 md:px-16 md:h-16 md:absolute top-[94px] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 mb-4 md:0 hover:bg-white hover:text-black transition-all duration-300 ease-in-out"
+                className="text-sm md:text-base text-white bg-black rounded-full px-8 h-10 md:px-16 md:h-12 md:absolute top-[70px] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 mb-4 md:0 hover:bg-white hover:text-black transition-all duration-300 ease-in-out"
               >
                 See Plans
               </Button>
-              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block w-full object-cover mx-auto" />
+              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block maw-w-m  d object-cover mx-auto" />
 
               <img src="./images/hero_cover_mobile_2.png" alt="Hero Image" className="block md:hidden w-full object-cover mx-auto" />
             </div>
