@@ -14,7 +14,7 @@ export function Hero() {
           backgroundImage: 'url(/images/hero_bg_3.svg)'
         }}
       >
-      <Section id="home" className="min-h-screen pt-36 md:pt-32 pb-0 md:pb-0 px-4 flex">
+      <Section id="home" className="md:min-h-screen pt-36 md:pt-32 pb-0 md:pb-0 px-4 flex">
         <Container className="px-0">
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
