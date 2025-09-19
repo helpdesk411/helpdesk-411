@@ -1,7 +1,5 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
-import { Button } from "@/components/Button";
-import { QuoteButton } from "@/components/QuoteButton";
 import { getCTAFinal } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
