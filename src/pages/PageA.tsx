@@ -7,7 +7,6 @@ import { AddOns } from "@/sections/AddOns";
 import { FAQ } from "@/sections/FAQ";
 import { CTAFinal } from "@/sections/CTAFinal";
 import { Footer } from "@/sections/Footer";
-import { PageSwitcher } from "@/components/PageSwitcher";
 import { SEO } from "@/components/SEO";
 import { StructuredData } from "@/components/StructuredData";
 
@@ -17,7 +16,6 @@ export default function PageA() {
       <SEO />
       <StructuredData type="service" />
       <div className="min-h-screen bg-background p-2 md:px-6 md:py-6">
-        <PageSwitcher />
         <Navbar />
         <main>
           <Hero />
