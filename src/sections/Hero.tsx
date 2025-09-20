@@ -14,7 +14,7 @@ export function Hero() {
           backgroundImage: 'url(/images/hero_bg_3.svg)'
         }}
       >
-      <Section id="home" className="md:min-h-screen pt-36 md:pt-32 pb-0 md:pb-0 px-4 flex">
+      <Section id="home" className="md:min-h-screen pt-36 md:pt-48 pb-0 md:pb-0 px-4 flex">
         <Container className="px-0">
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
@@ -29,18 +29,19 @@ export function Hero() {
               <p className="text-base md:text-xl text-[#737373] mb-6 md:mb-6 max-w-xl md:max-w-2xl mx-auto leading-relaxed font-light px-2">
                 Scalable, always-on IT support for growing businesses. From essential coverage to full compliance and 24/7 protection, we keep your systems running, your data safe, and your team focused.
               </p>
-            </ScrollAnimation>
-
-            <div className="md:flex items-start justify-center max-w-2xl mx-auto mt-8 h-[400px] relative">
               <Button 
                 size="sm" 
                 variant="default"
                 href={heroData.secondaryAction.href}
-                className="text-sm md:text-base text-white bg-black rounded-full px-8 h-10 md:px-16 md:h-12 md:absolute top-[70px] md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 mb-4 md:0 hover:bg-white hover:text-black transition-all duration-300 ease-in-out"
+                className="text-sm md:text-base text-white bg-black rounded-full px-8 h-10 md:px-16 md:h-12 mb-4 md:0 hover:bg-white hover:text-black transition-all duration-300 ease-in-out"
               >
                 See Plans
               </Button>
-              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block maw-w-m  d object-cover mx-auto" />
+            </ScrollAnimation>
+
+            <div className="md:flex items-start justify-center max-w-2xl mx-auto mt-8 h-[400px] relative">
+              
+              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block object-cover mx-auto" />
 
               <img src="./images/hero_cover_mobile_2.png" alt="Hero Image" className="block md:hidden w-full object-cover mx-auto" />
             </div>
