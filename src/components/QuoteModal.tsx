@@ -29,7 +29,7 @@ declare global {
   }
 }
 
-type ViewState = "form" | "success" | "error";
+type ViewState = "form" | "success" | "error" | "us-only";
 type CaptchaStatus = "idle" | "loading" | "ready" | "verified" | "expired" | "error";
 
 interface FormErrors {
@@ -235,6 +235,12 @@ export function QuoteModal({
       const json = await r.json().catch(() => ({} as Record<string, unknown>));
 
       if (!r.ok) {
+        // Check for US-only restriction
+        if (r.status === 403 && /US|United States/i.test(String(json?.error || ""))) {
+          setView("us-only");
+          return;
+        }
+        
         // Map CAPTCHA errors to inline captcha message so users know what happened
         const msg = String(json?.error || "");
         if (r.status === 400 && /captcha|security/i.test(msg)) {
@@ -563,6 +569,32 @@ export function QuoteModal({
                   className="bg-black text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors"
                 >
                   Try again
+                </button>
+              </div>
+            </div>
+          )}
+
+          {view === "us-only" && (
+            <div className="space-y-4 text-center">
+              <div className="flex justify-center">
+                <AlertCircle className="w-12 h-12 text-orange-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-black">Service Not Available</h3>
+              <p className="text-gray-700">
+                Quote requests are currently only available for businesses located in the United States.
+              </p>
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 text-left">
+                <p className="text-sm text-orange-800">
+                  <strong>Why is this restricted?</strong><br/>
+                  We're currently focusing on serving US-based businesses to ensure the best support experience.
+                </p>
+              </div>
+              <div className="flex gap-3 justify-end">
+                <button
+                  onClick={closeAndReset}
+                  className="bg-black text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                >
+                  Close
                 </button>
               </div>
             </div>
