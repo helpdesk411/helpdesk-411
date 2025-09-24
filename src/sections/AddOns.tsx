@@ -112,7 +112,7 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
           </Badge>
 
           <h3 className={cn(
-            "md:w-2/4 text-xl md:text-2xl mb-4 md:mb-10 transition-colors flex-grow",
+            "md:w-[25ch] text-xl md:text-2xl mb-4 md:mb-10 transition-colors flex-grow leading-tight",
             isRouteB 
               ? "text-white group-hover:text-red-400" 
               : "text-[#4d4d4d] group-hover:text-primary"
