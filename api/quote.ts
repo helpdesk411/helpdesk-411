@@ -80,13 +80,28 @@ module.exports = async function handler(
       req.headers["x-forwarded-for"]?.split(",")[0] ||
       req.socket.remoteAddress;
 
-    const geoResp = await fetch(`https://ipapi.co/${ip}/json/`);
-    const geoData = await geoResp.json();
-
-    if (geoData.country !== "US") {
-      return res
-        .status(403)
-        .json({ error: "Sorry, quote requests are allowed only from the US." });
+    try {
+      const geoResp = await fetch(`https://ipapi.co/${ip}/json/`, {
+        timeout: 5000, // 5 second timeout
+      });
+      
+      if (!geoResp.ok) {
+        console.error('Geolocation API error:', geoResp.status);
+        // If geolocation fails, allow the request to proceed
+        // You can change this behavior if you prefer to block when geolocation fails
+      } else {
+        const geoData = await geoResp.json();
+        
+        if (geoData.country && geoData.country !== "US") {
+          return res
+            .status(403)
+            .json({ error: "Sorry, quote requests are allowed only from the US." });
+        }
+      }
+    } catch (error) {
+      console.error('Geolocation check failed:', error);
+      // If geolocation fails, allow the request to proceed
+      // You can change this behavior if you prefer to block when geolocation fails
     }
 
     const {
@@ -150,8 +165,6 @@ module.exports = async function handler(
     }
 
     // Verify Turnstile on server
-    const ip =
-      (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ?? "";
     const verifyBody = new URLSearchParams({
       secret: TURNSTILE_SECRET,
       response: turnstileToken,
