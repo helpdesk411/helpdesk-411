@@ -80,6 +80,8 @@ module.exports = async function handler(
       req.headers["x-forwarded-for"]?.split(",")[0] ||
       req.socket.remoteAddress;
 
+    console.log('Checking IP for geolocation:', ip);
+
     try {
       const geoResp = await fetch(`https://ipapi.co/${ip}/json/`, {
         timeout: 5000, // 5 second timeout
@@ -87,21 +89,27 @@ module.exports = async function handler(
       
       if (!geoResp.ok) {
         console.error('Geolocation API error:', geoResp.status);
-        // If geolocation fails, allow the request to proceed
-        // You can change this behavior if you prefer to block when geolocation fails
-      } else {
-        const geoData = await geoResp.json();
-        
-        if (geoData.country && geoData.country !== "US") {
-          return res
-            .status(403)
-            .json({ error: "Sorry, quote requests are allowed only from the US." });
-        }
+        return res
+          .status(403)
+          .json({ error: "Sorry, quote requests are allowed only from the US." });
       }
+      
+      const geoData = await geoResp.json();
+      console.log('Geolocation data:', geoData);
+      
+      if (geoData.country && geoData.country !== "US") {
+        console.log('Blocking non-US request from:', geoData.country);
+        return res
+          .status(403)
+          .json({ error: "Sorry, quote requests are allowed only from the US." });
+      }
+      
+      console.log('US request approved');
     } catch (error) {
       console.error('Geolocation check failed:', error);
-      // If geolocation fails, allow the request to proceed
-      // You can change this behavior if you prefer to block when geolocation fails
+      return res
+        .status(403)
+        .json({ error: "Sorry, quote requests are allowed only from the US." });
     }
 
     const {
