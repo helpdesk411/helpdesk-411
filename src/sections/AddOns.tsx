@@ -3,7 +3,7 @@ import { Badge } from "@/components/Badge";
 import { getAddOns, type AddOnCard } from "@/lib/design";
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
-import { MapPin } from "lucide-react";
+import { MapPin, Building2, AlertTriangle, Clock, ShoppingCart, Shield } from "lucide-react";
 import { ScrollAnimation, StaggerAnimation, ScaleIn } from "@/components/ScrollAnimation";
 
 interface AddOnCardComponentProps {
@@ -15,7 +15,7 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
   const isRouteB = pathname === "/b";
   const isRouteC = pathname === "/c";
   
-  // Map card badges to their corresponding new icons for route C
+  // Map card badges to their corresponding icons
   const getIconForRouteC = (badge: string) => {
     switch (badge) {
       case "Onsite Visits":
@@ -30,6 +30,24 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
         return "images/compliance_support.svg";
       default:
         return card.image;
+    }
+  };
+
+  // Get the appropriate Lucide icon for each addon
+  const getAddonIcon = (badge: string) => {
+    switch (badge) {
+      case "Onsite Visits":
+        return Building2;
+      case "Emergency Response":
+        return AlertTriangle;
+      case "After-Hours Support":
+        return Clock;
+      case "Hardware Procurement":
+        return ShoppingCart;
+      case "Compliance Support":
+        return Shield;
+      default:
+        return MapPin;
     }
   };
   
@@ -79,12 +97,17 @@ function AddOnCardComponent({ card, pathname = "/" }: AddOnCardComponentProps) {
                 : "bg-white text-accent-foreground"
             )}
           >
-            <MapPin 
-              size={16} 
-              className={cn(
-                isRouteB ? "text-black" : "text-red-500"
-              )}
-            />
+            {(() => {
+              const IconComponent = getAddonIcon(card.badge || "");
+              return (
+                <IconComponent 
+                  size={16} 
+                  className={cn(
+                    isRouteB ? "text-black" : "text-red-500"
+                  )}
+                />
+              );
+            })()}
             {card.badge}
           </Badge>
 
