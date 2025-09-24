@@ -75,6 +75,20 @@ module.exports = async function handler(
   }
 
   try {
+    // Check GeoIP (US-only)
+    const ip =
+      req.headers["x-forwarded-for"]?.split(",")[0] ||
+      req.socket.remoteAddress;
+
+    const geoResp = await fetch(`https://ipapi.co/${ip}/json/`);
+    const geoData = await geoResp.json();
+
+    if (geoData.country !== "US") {
+      return res
+        .status(403)
+        .json({ error: "Sorry, quote requests are allowed only from the US." });
+    }
+
     const {
       planName, // string
       planPrice, // number (per device)
