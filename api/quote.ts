@@ -179,7 +179,7 @@ module.exports = async function handler(
     // 1) Email to Admin / Sales Team (YOUR TEMPLATE)
     await sendEmail({
       from: FROM_EMAIL,
-      to: [SALES_TO, "kazr@corporatetech.com", "nima@corporatetech.com"],
+      to: [SALES_TO, "kazr@corporatetech.com"],
       reply_to: email, // reply goes to requester
       subject: "New Helpdesk Plan Quote Request",
       text: `Hi Team,
