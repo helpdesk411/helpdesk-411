@@ -150,7 +150,7 @@ export function Footer() {
                 ? "text-[#333333]"
                 : "text-primary-foreground/60"
             )}>
-              © 2024 help desk 411. All rights reserved. Professional IT support services.
+              © {new Date().getFullYear()} help desk 411. All rights reserved. Professional IT support services.
             </p>
           </div>
         </Container>

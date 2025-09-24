@@ -77,7 +77,7 @@ function PainPointCard({ icon: IconComponent, title, description, isCentered = f
             ? "bg-gray-100 text-black shadow-2xl border border-gray-200" 
             : "bg-white text-gray-800 shadow-lg")
         : (isCentered 
-            ? "bg-black text-white shadow-2xl" 
+            ? "bg-gray-100 text-gray-800 shadow-lg md:bg-black md:text-white md:shadow-2xl" 
             : "bg-gray-100 text-gray-800 shadow-lg")
     )}>
       <div className={cn(
@@ -94,7 +94,7 @@ function PainPointCard({ icon: IconComponent, title, description, isCentered = f
           ? (isCentered ? "text-black" : "text-[#C8C8C8]")
           : isRouteC
           ? (isCentered ? "text-black" : "text-[#333333]")
-          : (isCentered ? "text-white" : "text-gray-800")
+          : (isCentered ? "text-gray-800 md:text-white" : "text-gray-800")
       )}>
         {title}
       </h3>
@@ -104,7 +104,7 @@ function PainPointCard({ icon: IconComponent, title, description, isCentered = f
           ? (isCentered ? "text-black" : "text-[#969696]")
           : isRouteC
           ? (isCentered ? "text-black" : "text-[#666666]")
-          : (isCentered ? "text-white" : "text-gray-600")
+          : (isCentered ? "text-gray-600 md:text-white" : "text-gray-600")
       )}>
         {description}
       </p>
