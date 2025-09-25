@@ -82,9 +82,9 @@ function PainPointCard({ icon: IconComponent, title, description, isCentered = f
     )}>
       <div className={cn(
         "mb-6", 
-        isRouteB ? "text-black" : 
+        isRouteB ? "text-red-500" : 
         isRouteC ? "text-red-500" : 
-        "text-orange-400"
+        "text-red-500"
       )}>
         <IconComponent className="h-8 w-8" />
       </div>
@@ -201,9 +201,7 @@ export function PainPoints() {
                   className={cn(
                     "w-4 h-4 rounded-full transition-all duration-300 hover:scale-110 border-2",
                     isCenter
-                      ? (pathname === "/b" ? "bg-red-500 border-red-500" : 
-                         pathname === "/c" ? "bg-red-500 border-red-500" :
-                         "bg-orange-300 border-orange-300")
+                      ? "bg-red-500 border-red-500"
                       : "bg-transparent border-gray-300 hover:border-gray-400"
                   )}
                   onClick={() => api?.scrollTo(cardIndex)}
