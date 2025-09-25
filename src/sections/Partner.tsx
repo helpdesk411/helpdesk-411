@@ -151,7 +151,7 @@
               
               {/* Image */}
               <div className="flex flex-col gap-32 md:mb-32">
-                <img src="/images/partners_image.svg" alt="Partner" className="hidden md:block w-full h-96 md:h-full md:object-cover object-center rounded-2xl" />
+                <img src="/images/partners_img.png" alt="Partner" className="hidden md:block w-3/4 mx-auto md:object-contain object-center rounded-2xl" />
 
                 <img src="/images/partners_image_mobile.svg" alt="Partner" className="block md:hidden w-full object-cover rounded-2xl" />
 
