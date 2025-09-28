@@ -39,11 +39,11 @@ export function Hero() {
               </Button>
             </ScrollAnimation>
 
-            <div className="md:flex items-start justify-center max-w-2xl mx-auto mt-8 h-[400px] relative">
+            <div className="md:flex items-start justify-center max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 h-[400px] md:h-[500px] lg:h-[600px] xl:h-[500px] relative">
               
-              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block object-cover mx-auto" />
+              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block object-cover object-top mx-auto w-full h-full" />
 
-              <img src="./images/hero_cover_mobile_2.png" alt="Hero Image" className="block md:hidden w-full object-cover mx-auto" />
+              <img src="./images/hero_cover_mobile_2.png" alt="Hero Image" className="block md:hidden w-full object-contain object-top mx-auto" />
             </div>
           </div>
         </Container>
