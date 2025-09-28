@@ -1,71 +1,35 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { getBrand } from "@/lib/design";
-import { useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const brandData = getBrand();
-  const location = useLocation();
-  const pathname = location.pathname;
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Update scrolled state for styling
+      // Update scrolled state for styling and opacity
       setIsScrolled(currentScrollY > 8);
-      
-      // Only apply hide/show effect on main route "/"
-      if (pathname === "/") {
-        // Determine scroll direction
-        const isScrollingDown = currentScrollY > lastScrollY;
-        const isScrollingUp = currentScrollY < lastScrollY;
-        
-        // Hide navbar when scrolling down (after 100px to avoid immediate hiding)
-        if (isScrollingDown && currentScrollY > 100) {
-          setIsVisible(false);
-        }
-        
-        // Show navbar when scrolling up
-        if (isScrollingUp) {
-          setIsVisible(true);
-        }
-        
-        // Always show navbar at the top
-        if (currentScrollY <= 100) {
-          setIsVisible(true);
-        }
-      } else {
-        // For other routes, always keep navbar visible
-        setIsVisible(true);
-      }
-      
-      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, pathname]);
+  }, []);
 
-  // Original navbar for main route "/" with hide/show scroll effect
   return (
     <>
       <header 
-        className={cn(
-          "max-w-7xl mx-auto fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out",
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        )}
+        className="max-w-7xl mx-auto fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
       >
         <nav 
           className={cn(
             "mx-8 rounded-full transition-all duration-300",
             isScrolled 
-              ? "mt-6 bg-black/95 backdrop-blur-md shadow-2xl" 
+              ? "mt-6 bg-black/95 backdrop-blur-md shadow-2xl opacity-90" 
               : "mt-8 md:mt-12 bg-black/90 backdrop-blur-sm"
           )}
         >
@@ -195,15 +159,6 @@ export function Navbar() {
           </div>
         )}
       </header>
-
-      {/* Floating indicator when navbar is hidden */}
-      {!isVisible && (
-        <div className="fixed top-4 right-4 z-40 transition-all duration-300 ease-in-out">
-          <div className="bg-black/80 backdrop-blur-sm rounded-full p-3 shadow-lg">
-            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
