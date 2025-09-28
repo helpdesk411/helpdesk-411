@@ -47,12 +47,12 @@ export function Footer() {
 
   return (
     <footer className={cn(
-      "rounded-xl text-primary-foreground",
+      "rounded-xl text-white",
       pathname === "/b" 
         ? "rounded-b-2xl mx-4 mb-4" 
         : pathname === "/c"
         ? "bg-gray-100"
-        : "bg-red-500"
+        : "bg-black"
     )} style={pathname === "/b" ? {
       borderRadius: "0 0 20px 20px",
       background: "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 36.98%, rgba(0, 0, 0, 0.52) 100%), #EA2427"
@@ -81,7 +81,7 @@ export function Footer() {
                 "text-sm leading-relaxed mb-6",
                 pathname === "/c" 
                   ? "text-[#333333]" 
-                  : "text-primary-foreground/80"
+                  : "text-white/80"
               )}>
                 Proactive IT support that scales with your business. From essential coverage to enterprise-grade protection.
               </p>
@@ -94,7 +94,7 @@ export function Footer() {
                   "font-semibold mb-4",
                   pathname === "/c" 
                     ? "text-[#333333]" 
-                    : "text-primary-foreground"
+                    : "text-white"
                 )}>
                   {column.title}
                 </h3>
@@ -112,7 +112,7 @@ export function Footer() {
                               "text-sm transition-colors",
                               pathname === "/c"
                                 ? "text-[#333333] hover:text-[#666666]"
-                                : "text-primary-foreground/80 hover:text-primary-foreground"
+                                : "text-white/80 hover:text-white"
                             )}
                           >
                             {link}
@@ -123,7 +123,7 @@ export function Footer() {
                               "text-sm",
                               pathname === "/c"
                                 ? "text-[#333333]/60"
-                                : "text-primary-foreground/60"
+                                : "text-white/60"
                             )}
                           >
                             {link}
@@ -142,13 +142,13 @@ export function Footer() {
             "border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center",
             pathname === "/c"
               ? "border-[#333333]/20"
-              : "border-primary-foreground/20"
+              : "border-white/20"
           )}>
             <p className={cn(
               "w-3/4 md:w-full text-center text-sm",
               pathname === "/c"
                 ? "text-[#333333]"
-                : "text-primary-foreground/60"
+                : "text-white/60"
             )}>
               © {new Date().getFullYear()} help desk 411. All rights reserved. Professional IT support services.
             </p>
