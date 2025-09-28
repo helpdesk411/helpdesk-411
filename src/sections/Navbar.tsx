@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { getBrand } from "@/lib/design";
-import { useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const brandData = getBrand();
-  const location = useLocation();
-  const pathname = location.pathname;
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
