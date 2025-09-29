@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PageA from "@/pages/PageA";
 import { QuoteModal } from "@/components/QuoteModal";
 import { QuoteModalProvider, useQuoteModal } from "@/contexts/QuoteModalContext";
+import { ChatWidget } from "@/components/ChatWidget";
 
 function AppContent() {
   const { modalState, closeModal } = useQuoteModal();
@@ -21,6 +22,9 @@ function AppContent() {
         planDescription={modalState.planDescription}
         isPopular={modalState.isPopular}
       />
+      
+      {/* Chat Widget */}
+      <ChatWidget />
     </Router>
   );
 }
