@@ -33,7 +33,7 @@ export function Navbar() {
               : "mt-8 md:mt-12 bg-black/90 backdrop-blur-sm"
           )}
         >
-          <div className="flex h-16 items-center justify-between px-4">
+          <div className="flex h-16 items-center px-4">
             {/* Brand */}
             <a 
               href="/" 
@@ -47,7 +47,7 @@ export function Navbar() {
             </a>
 
             {/* Navigation Links - Hidden on mobile */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex flex-1 items-center justify-center space-x-8">
               <a
                 href="#home"
                 className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
@@ -72,17 +72,26 @@ export function Navbar() {
               >
                 Add-Ons
               </a>
+            </div>
+
+            <div className="flex items-center gap-8">
               <a
-                href="#contact"
-                className="bg-white text-black hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105 rounded-full py-3 px-6"
+                href="https://helpdesk411-platform.vercel.app/login"
+                className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
               >
-                Contact
+                Sign In
+              </a>
+              <a
+                href="https://helpdesk411-platform.vercel.app/register"
+                className="bg-white text-black hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105 rounded-full py-3 px-8"
+              >
+                Sign Up
               </a>
             </div>
 
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-white/10 text-white transition-all duration-200 ease-in-out transform hover:scale-110"
+              className="lg:hidden p-2 ml-auto rounded-lg hover:bg-white/10 text-white transition-all duration-200 ease-in-out transform hover:scale-110"
               aria-label="Toggle navigation menu"
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -148,11 +157,18 @@ export function Navbar() {
                   Add-Ons
                 </a>
                 <a 
-                  href="#contact" 
+                  href="/signin" 
                   className="block text-black hover:text-gray-700 text-lg"
                   onClick={() => setIsOpen(false)}
                 >
-                  Contact
+                  Sign In
+                </a>
+                <a 
+                  href="/signup" 
+                  className="block text-white bg-black hover:bg-gray-800 text-lg text-center rounded-full py-3"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Sign Up
                 </a>
               </div>
             </div>
