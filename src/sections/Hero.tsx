@@ -9,12 +9,12 @@ export function Hero() {
 
     return (
       <div 
-        className="min-h-screen relative bg-cover bg-left md:bg-center bg-no-repeat rounded-4xl overflow-hidden"
+        className="relative bg-cover bg-left md:bg-center bg-no-repeat rounded-4xl overflow-hidden"
         style={{
           backgroundImage: 'url(/images/hero_bg_3.svg)'
         }}
       >
-      <Section id="home" className="md:min-h-screen pt-36 md:pt-48 pb-0 md:pb-0 px-4 flex">
+      <Section id="home" className="pt-36 md:pt-48 pb-0 md:pb-0 px-4 flex">
         <Container className="px-0">
           <div className="text-center w-full max-w-4xl mx-auto">
             {/* Headline */}
@@ -39,9 +39,9 @@ export function Hero() {
               </Button>
             </ScrollAnimation>
 
-            <div className="md:flex items-start justify-center max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 h-[400px] md:h-[500px] lg:h-[600px] xl:h-[500px] relative">
+            <div className="md:flex items-start justify-center max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto mt-8 h-[400px] md:h-auto relative">
               
-              <img src="./images/hero_cover_2.png" alt="Hero Image" className="hidden md:block object-cover object-top mx-auto w-full h-full" />
+              <img src="./images/hero.png" alt="Hero Image" className="hidden md:block object-contain object-top mx-auto w-full h-auto" />
 
               <img src="./images/hero_cover_mobile_2.png" alt="Hero Image" className="block md:hidden w-full object-contain object-top mx-auto" />
             </div>
