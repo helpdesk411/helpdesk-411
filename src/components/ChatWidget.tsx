@@ -31,7 +31,7 @@ export const ChatWidget = () => {
     const loadSocialIntents = () => {
       return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = 'https://www.socialintents.com/api/chat/socialintents.1.4.js#2c9fa6c39803cef10198191b7c462400';
+        script.src = 'https://www.socialintents.com/api/chat/socialintents.1.4.js#2c9fa8999a7fa734019a8136919b012f';
         script.async = true;
         script.onload = resolve;
         script.onerror = reject;
