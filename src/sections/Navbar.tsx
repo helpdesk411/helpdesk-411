@@ -76,13 +76,13 @@ export function Navbar() {
 
             <div className="flex items-center gap-8">
               <a
-                href="https://helpdesk411-platform.vercel.app/login"
+                href="https://dashboard.helpdesk411.com/login"
                 className="text-white/90 hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105"
               >
                 Sign In
               </a>
               <a
-                href="https://helpdesk411-platform.vercel.app/register"
+                href="https://dashboard.helpdesk411.com/register"
                 className="bg-white text-black hover:text-white text-sm font-medium transition-all duration-200 ease-in-out transform hover:scale-105 rounded-full py-3 px-8"
               >
                 Sign Up
@@ -156,15 +156,15 @@ export function Navbar() {
                 >
                   Add-Ons
                 </a>
-                <a 
-                  href="/signin" 
+                <a
+                  href="https://dashboard.helpdesk411.com/login"
                   className="block text-black hover:text-gray-700 text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   Sign In
                 </a>
-                <a 
-                  href="/signup" 
+                <a
+                  href="https://dashboard.helpdesk411.com/register"
                   className="block text-white bg-black hover:bg-gray-800 text-lg text-center rounded-full py-3"
                   onClick={() => setIsOpen(false)}
                 >
