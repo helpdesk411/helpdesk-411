@@ -1,4 +1,3 @@
-import { useQuoteModal } from "@/contexts/QuoteModalContext";
 import { type VariantProps, cva } from "class-variance-authority";
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
@@ -39,21 +38,23 @@ export interface QuoteButtonProps
 }
 
 const QuoteButton = forwardRef<HTMLButtonElement, QuoteButtonProps>(
-  ({ 
-    className, 
-    variant, 
-    size, 
-    planName, 
-    planPrice, 
-    planDescription, 
-    isPopular = false, 
-    children, 
-    ...props 
+  ({
+    className,
+    variant,
+    size,
+    planName,
+    planPrice,
+    planDescription,
+    isPopular = false,
+    children,
+    ...props
   }, ref) => {
-    const { openModal } = useQuoteModal();
-
     const handleClick = () => {
-      openModal(planName, planPrice, planDescription, isPopular);
+      // Redirect to platform signup with plan parameter
+      // Use environment variable for platform URL (works in both dev and prod)
+      const platformUrl = import.meta.env.VITE_PLATFORM_URL || window.location.origin;
+      const signupUrl = `${platformUrl}/register?plan=${planName.toLowerCase()}`;
+      window.location.href = signupUrl;
     };
 
     return (
