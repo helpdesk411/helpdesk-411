@@ -189,7 +189,7 @@
             "Local and cloud backup with recovery support"
           ],
           "cta": {
-            "label": "Request a Quote",
+            "label": "Subscribe",
             "href": "/signup?plan=essentials"
           }
         },
@@ -211,7 +211,7 @@
             "Monthly reporting with actionable insights"
             ],
           "cta": {
-            "label": "Request a Quote",
+            "label": "Subscribe",
             "href": "/signup?plan=proactive"
           }
         },
@@ -232,7 +232,7 @@
             "Policy creation and audit-ready documentation"
           ],
             "cta": {
-            "label": "Request a Quote",
+            "label": "Subscribe",
             "href": "/contact"
           }
         }
